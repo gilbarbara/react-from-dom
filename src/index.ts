@@ -5,6 +5,7 @@ interface IOptions {
   actions?: IAction[];
   index?: number;
   level?: number;
+  nodeOnly?: boolean;
   selector?: string;
   type?: string;
 }
@@ -90,27 +91,28 @@ function parseName(nodeName) {
   return nodeName.toLowerCase();
 }
 
-export function convertFromNode(node: Node, options: IOptions = {}) {
-  if (!node) {
+export function convertFromNode(input: Node, options: IOptions = {}) {
+  if (!input || !(input instanceof Node)) {
     return null;
   }
 
   const { actions = [], index = 0, level = 0 } = options;
 
-  let nextNode = node;
+  let node = input;
   const key = `${level}-${index}`;
   const result: Array<Node | React.ReactNode> = [];
 
+  /* istanbul ignore else */
   if (Array.isArray(actions)) {
     actions.forEach(action => {
-      if (action.condition(nextNode, key, level)) {
+      if (action.condition(node, key, level)) {
         if (typeof action.pre === 'function') {
-          nextNode = action.pre(nextNode, key, level);
+          node = action.pre(node, key, level);
 
-          /* istanbul ignore next */
-          if (!(nextNode instanceof Node)) {
-            nextNode = node;
+          if (!(node instanceof Node)) {
+            node = input;
 
+            /* istanbul ignore else */
             if (process.env.NODE_ENV !== 'production') {
               // tslint:disable-next-line:no-console
               console.warn(
@@ -121,7 +123,7 @@ export function convertFromNode(node: Node, options: IOptions = {}) {
         }
 
         if (typeof action.post === 'function') {
-          result.push(action.post(nextNode, key, level));
+          result.push(action.post(node, key, level));
         }
       }
     });
@@ -131,16 +133,16 @@ export function convertFromNode(node: Node, options: IOptions = {}) {
     return result;
   }
 
-  switch (nextNode.nodeType) {
+  switch (node.nodeType) {
     case 1: // regular dom-node
       return React.createElement(
-        parseName(nextNode.nodeName),
-        parseAttributes(nextNode, key),
-        parseChildren(nextNode.childNodes, level, options),
+        parseName(node.nodeName),
+        parseAttributes(node, key),
+        parseChildren(node.childNodes, level, options),
       );
 
     case 3: // textnode
-      const nodeText = nextNode.nodeValue!.toString();
+      const nodeText = node.nodeValue!.toString();
 
       /* istanbul ignore else */
       if (!/[a-zA-Z0-9_]+/.test(nodeText)) {
@@ -148,18 +150,18 @@ export function convertFromNode(node: Node, options: IOptions = {}) {
       }
 
       /* istanbul ignore next */
-      if (!nextNode.parentNode) {
+      if (!node.parentNode) {
         return nodeText;
       }
 
-      const parentNodeName = nextNode.parentNode.nodeName.toLowerCase();
+      const parentNodeName = node.parentNode.nodeName.toLowerCase();
 
-      /* istanbul ignore next */
       if (noTextChildNodes.indexOf(parentNodeName) !== -1) {
+        /* istanbul ignore else */
         if (/\S/.test(nodeText)) {
           // tslint:disable-next-line:no-console
           console.warn(
-            `a textnode is not allowed inside '${parentNodeName}'. your text "${nodeText}" will be ignored`,
+            `A textNode is not allowed inside '${parentNodeName}'. Your text "${nodeText}" will be ignored`,
           );
         }
         return null;
@@ -170,28 +172,34 @@ export function convertFromNode(node: Node, options: IOptions = {}) {
     case 8: // html-comment
       return null;
 
+    /* istanbul ignore next */
     default:
       return null;
   }
 }
 
-export function convertFromString(text: string, options: IOptions = {}) {
-  if (!text || typeof text !== 'string') {
+export function convertFromString(input: string, options: IOptions = {}) {
+  if (!input || typeof input !== 'string') {
     return null;
   }
-  const { type = 'text/html', selector = 'body > *' } = options;
+  const { nodeOnly = false, selector = 'body > *', type = 'text/html' } = options;
 
   try {
     const parser = new DOMParser();
-    const doc = parser.parseFromString(text, type as SupportedType);
+    const doc = parser.parseFromString(input, type as SupportedType);
     const node = doc.querySelector(selector);
 
     if (!(node instanceof Node)) {
-      throw new Error('Error parsing text');
+      throw new Error('Error parsing input');
+    }
+
+    if (nodeOnly) {
+      return node;
     }
 
     return convertFromNode(node, options);
   } catch (error) {
+    /* istanbul ignore else */
     if (process.env.NODE_ENV !== 'production') {
       // tslint:disable-next-line:no-console
       console.error(error);
