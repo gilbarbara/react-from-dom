@@ -19,9 +19,9 @@ Set a string with HTML/XML source code OR a DOM Node which it will be used to cr
 
 ```jsx
 import React from 'react';
-import convertDOM from 'react-from-dom';
+import convert from 'react-from-dom';
 
-const panel = convertDOM(`
+const panel = convert(`
 <div class="panel">
   <div class="panel-header">
     <h2>Title</h2>
@@ -46,7 +46,8 @@ audio.setAttribute(
 );
 const audioContent = document.createTextNode('Your browser does not support the audio element.');
 audio.appendChild(audioContent);
-const audioElement = convertDOM(audio);
+
+const audioElement = convert(audio);
 
 const App = () => (
   <div>
@@ -59,19 +60,23 @@ const App = () => (
 
 The function accepts two parameters:
 
-**type** {string|Node}  - *required*  
+**input** {string|Node}  - *required*  
 An HTML/XML source code string or a DOM node.
 
 **options** {object} - optional
 
 - **actions** {Action[]}  
-  An array of actions to parse your input before converting. Read about them below.
+  An array of actions to parse your input before converting.  
+  Read about them below.
+- **nodeOnly** {boolean}  
+  Return the DOM Node instead of a React Element.  
+  *Only used for string inputs.*
 - **selector** {string}  
-  The CSS selector used to get your entry. Default: `body > *`
-  *Only for string input.*
+  The CSS selector used to get your entry. Default: `body > *`  
+  *Only used for string inputs.*
 - **type** {string}  
-  The mimeType used by DOMParser's parseFromString. Default: `text/html`
-  *Only for string input.*
+  The mimeType used by DOMParser's parseFromString. Default: `text/html`  
+  *Only used for string inputs.*
 
 ### Actions
 
@@ -144,4 +149,5 @@ You can mutate/update a Node before the conversion or replace it  with a ReactNo
 
 ## Credits
 
-This is a fork from diva-e's [dom-to-react](https://github.com/diva-e/dom-to-react) package. Thanks! ❤️
+This is a fork from [dom-to-react](https://github.com/diva-e/dom-to-react) package. Thanks! ❤️
+
