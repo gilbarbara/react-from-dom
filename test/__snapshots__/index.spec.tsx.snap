@@ -1,0 +1,223 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`react-from-dom should convert a search form from string 1`] = `
+<form
+  _lpchecked="1"
+  action="/search"
+  autoComplete="off"
+  className="search-bar"
+  id="search"
+  method="get"
+>
+  <h1
+    key="1-3"
+  >
+    Search
+  </h1>
+  
+  Human
+  
+  <label
+    htmlFor="pet-select"
+    key="1-5"
+  >
+    Choose a pet:
+  </label>
+  <select
+    id="pet-select"
+    key="1-7"
+  >
+    <option
+      key="2-1"
+      value=""
+    >
+      --Please choose an option--
+    </option>
+    <option
+      key="2-3"
+      value="dog"
+    >
+      Dog
+    </option>
+    <option
+      key="2-5"
+      selected="selected"
+      value="cat"
+    >
+      Cat
+    </option>
+  </select>
+  <input
+    checked="checked"
+    key="1-9"
+    name="visible"
+    type="checkbox"
+    value="on"
+  />
+  <div
+    className="ps-relative"
+    key="1-11"
+  >
+    <input
+      aria-label="Search"
+      autoComplete="off"
+      className="s-input s-input__search js-search-field "
+      key="2-1"
+      maxLength="240"
+      name="q"
+      placeholder="Search…"
+      type="text"
+    />
+    <svg
+      aria-hidden="true"
+      className="svg-icon s-input-icon s-input-icon__search iconSearch"
+      height="18"
+      key="2-3"
+      viewBox="0 0 18 18"
+      width="18"
+    >
+      <path
+        d="M18 16.5l-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5zM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0z"
+        key="3-0"
+      />
+    </svg>
+  </div>
+</form>
+`;
+
+exports[`react-from-dom should convert an SVG from string 1`] = `
+<svg
+  height="296px"
+  preserveAspectRatio="xMidYMid"
+  version="1.1"
+  viewBox="0 0 256 296"
+  width="256px"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlnsXlink="http://www.w3.org/1999/xlink"
+>
+  <defs
+    key="1-1"
+  >
+    <linearGradient
+      id="linearGradient-1"
+      key="2-1"
+      x1="50%"
+      x2="50%"
+      y1="0%"
+      y2="99.3024554%"
+    >
+      <stop
+        key="3-1"
+        offset="0%"
+        stopColor="#404040"
+        stopOpacity="0.3"
+      />
+      <stop
+        key="3-3"
+        offset="100%"
+        stopColor="#404040"
+        stopOpacity="0"
+      />
+    </linearGradient>
+  </defs>
+  <g
+    key="1-3"
+  >
+    <path
+      d="M115.497674,261.08837 L115.497674,154.478845 L23.8139535,101.729261 L23.8139535,162.501763 L65.8104558,186.8486 L65.8104558,232.549219 L115.497674,261.08837 Z M139.311628,261.714907 L189.916577,232.563707 L189.916577,185.779949 L232.186047,161.285235 L232.186047,101.27387 L139.311628,154.895035 L139.311628,261.714907 Z M219.971965,80.8276886 L171.155386,52.5391067 L128.292316,77.4106841 L85.1040206,52.5141067 L35.8521355,81.1812296 L127.765737,134.063073 L219.971965,80.8276886 Z M0,222.211907 L0,74.4948807 L127.986799,0 L256,74.1820085 L256,221.978632 L127.983954,295.72283 L0,222.211907 Z"
+      fill="#000000"
+      key="2-1"
+    />
+  </g>
+</svg>
+`;
+
+exports[`react-from-dom should convert an audio from Node 1`] = `
+<audio
+  controls="controls"
+  src="https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3"
+>
+  Your browser does not support the audio element.
+</audio>
+`;
+
+exports[`react-from-dom should handle actions 1`] = `
+<div
+  className="panel panel--fixed"
+>
+  <div
+    className="panel-header"
+    key="1-1"
+  >
+    <h2
+      key="2-1"
+    >
+      Title
+    </h2>
+  </div>
+  <div
+    className="panel-content"
+    key="1-3"
+  >
+    <ol
+      key="2-1"
+    >
+      <li
+        key="3-1"
+      >
+        line 1
+      </li>
+      <li
+        key="3-3"
+      >
+        line 2
+      </li>
+    </ol>
+    <p
+      key="2-3"
+    >
+      
+      This Element has a 
+      <code
+        key="3-1"
+      >
+        style
+      </code>
+       attribute.
+      <br
+        key="3-3"
+      />
+      
+      It also shows how to use the 
+      <code
+        key="3-5"
+      >
+        parser
+      </code>
+      -argument
+    
+    </p>
+    <img
+      key="2-5"
+    />
+    EMPTY
+    
+    <ReactMarkdown
+      key="2-7"
+      source="This is a test"
+    >
+      <div />
+    </ReactMarkdown>
+  </div>
+</div>
+`;
+
+exports[`react-from-dom should handle broken markup 1`] = `
+<div>
+  <span
+    key="1-0"
+  >
+    los
+  </span>
+</div>
+`;

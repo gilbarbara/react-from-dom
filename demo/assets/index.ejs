@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body>
+<main id="app">
+  <div class="root">
+
+    <div class="delete-me">Delete Me!</div>
+
+    <hr/>
+
+    <p>A simple &lt;p&gt;</p>
+
+    <hr/>
+
+    <img src="src/assets/image.svg" title="Attributes are passed on to the component" alt="Square, triangel, circle" />
+
+    <hr/>
+
+    <ul>
+      <li>Just a &lt;ul&gt; which will not be changed</li>
+      <li><a href="http://www.google.de">Link</a></li>
+    </ul>
+
+    <hr/>
+
+    <ul class="wannabe-ol">
+      <li>Just a &lt;ul&gt; which will be converted into a &lt;ol&gt;</li>
+      <li><a href="http://www.google.de">Link</a></li>
+    </ul>
+
+    <hr/>
+
+    <div class="demo-child-html">
+      <h2>I am a real component</h2>
+      <p>With headline and text. All loaded from the HTML dom</p>
+    </div>
+
+    <hr/>
+
+    <div class="demo-child-json">
+      <!-- {"headline":"I am a real component","text":"All my props are from a json within a HTML-Comment." } -->
+    </div>
+
+    <hr/>
+
+    <div class="demo-child-json">
+      <!-- {"headline":"I am a real component","text":"But my JSON is broken, so I'll throw an error... :`( " -->
+    </div>
+
+    <hr/>
+
+      <div title="These are some deeper nested text elements">
+        <div>
+          <div>
+            <div>
+              <div>
+                <span>Text</span>
+                <span>Text</span>
+                <span>Text</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <hr/>
+
+    <table>
+      <colgroup>
+        <col style="width: 100px;">
+        <col style="width: 150px;">
+      </colgroup>
+      <thead>
+        <tr><th>Cell</th><th>Cell</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Cell</td><td>Cell</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td>Cell</td><td>Cell</td></tr>
+      </tfoot>
+    </table>
+
+    <hr/>
+
+    <div class="with-style" style="background-color: rebeccapurple; color: lime; border-radius: 7px; padding: 12px;">
+      This Element has a <code>style</code> attribute.<br>
+      It also shows how to use the <code>parser</code>-argument
+    </div>
+
+  </div>
+
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+{
+  "name": "react-from-dom",
+  "version": "0.1.0",
+  "description": "Convert HTML/XML source code or DOM nodes to React elements",
+  "author": "Gil Barbara <gilbarbara@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gilbarbara/react-from-dom.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gilbarbara/react-from-dom/issues"
+  },
+  "homepage": "https://github.com/gilbarbara/react-from-dom#readme",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "types": "lib/index.d.ts",
+  "peerDependencies": {
+    "react": "^15.0.0 || ^16.0.0"
+  },
+  "keywords": [
+    "DOM",
+    "react",
+    "component"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/plugin-proposal-do-expressions": "^7.5.0",
+    "@babel/plugin-proposal-export-default-from": "^7.5.2",
+    "@babel/plugin-proposal-export-namespace-from": "^7.5.2",
+    "@babel/plugin-proposal-function-sent": "^7.5.0",
+    "@babel/plugin-proposal-json-strings": "^7.2.0",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.2.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.4.4",
+    "@babel/plugin-proposal-numeric-separator": "^7.2.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.5.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-syntax-import-meta": "^7.2.0",
+    "@babel/plugin-transform-object-assign": "^7.2.0",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.6.8",
+    "@types/react": "^16.8.23",
+    "@types/react-dom": "^16.8.4",
+    "babel-jest": "^24.8.0",
+    "bundlesize": "^0.18.0",
+    "chalk": "^2.4.2",
+    "cross-env": "^5.2.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "fetch-mock": "^7.3.7",
+    "husky": "^3.0.1",
+    "is-ci-cli": "^1.1.1",
+    "jest": "^24.8.0",
+    "jest-chain": "^1.1.2",
+    "jest-enzyme": "^7.0.2",
+    "jest-extended": "^0.11.2",
+    "jest-watch-typeahead": "^0.3.1",
+    "prettier": "^1.18.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "rimraf": "^2.6.3",
+    "serve": "^11.1.0",
+    "start-server-and-test": "^1.9.1",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^4.0.0",
+    "typescript": "^3.5.3",
+    "yargs": "^13.3.0"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run build:ts",
+    "build:ts": "tsc --outDir lib",
+    "watch": "npm run build:ts -- -w",
+    "clean": "rimraf lib",
+    "test": "is-ci \"test:coverage\" \"test:watch\"",
+    "test:coverage": "jest --coverage --bail",
+    "test:watch": "jest --watch --verbose",
+    "lint": "tslint -p tsconfig.json",
+    "format": "prettier \"**/*.{js,jsx,json,yml,yaml,css,less,scss,ts,tsx,md,graphql,mdx}\" --write",
+    "validate": "npm run lint && npm run test:coverage && npm run build && npm run bundlesize",
+    "bundlesize": "bundlesize",
+    "prepublishOnly": "npm run validate"
+  },
+  "prettier": {
+    "jsxBracketSameLine": false,
+    "printWidth": 100,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "bundlesize": [
+    {
+      "path": "./lib/index.js",
+      "maxSize": "3 kB"
+    }
+  ],
+  "husky": {
+    "hooks": {
+      "post-merge": "ts-node tools update",
+      "pre-commit": "ts-node tools has-commits && npm run validate"
+    }
+  }
+}
