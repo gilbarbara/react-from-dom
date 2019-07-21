@@ -42,6 +42,8 @@ export const panel = `
     </p>
     <img>EMPTY</img>
     <pre>This is a test</pre>
+    <code>throw new Error('Fail');</code>
+    <dl>Text</dl>
   </div>
   <div class="panel-footer">
     Footer
@@ -50,15 +52,53 @@ export const panel = `
 `;
 
 export const svg = `
-<svg width="256px" height="296px" viewBox="0 0 256 296" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
+<svg width="20px" height="6px" viewBox="0 0 20 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
     <defs>
-    <linearGradient x1="50%" y1="0%" x2="50%" y2="99.3024554%" id="linearGradient-1">
-            <stop stop-color="#404040" stop-opacity="0.3" offset="0%"></stop>
-            <stop stop-color="#404040" stop-opacity="0" offset="100%"></stop>
-        </linearGradient>
+        <path d="M3,6 C1.34314575,6 0,4.65685425 0,3 C0,1.34314575 1.34314575,0 3,0 C4.65685425,0 6,1.34314575 6,3 C6,4.65685425 4.65685425,6 3,6 Z M10,6 C8.34314575,6 7,4.65685425 7,3 C7,1.34314575 8.34314575,0 10,0 C11.6568542,0 13,1.34314575 13,3 C13,4.65685425 11.6568542,6 10,6 Z M17,6 C15.3431458,6 14,4.65685425 14,3 C14,1.34314575 15.3431458,0 17,0 C18.6568542,0 20,1.34314575 20,3 C20,4.65685425 18.6568542,6 17,6 Z" id="path-1"></path>
+        <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="166.666667%" gradientTransform="translate(0.500000,0.500000),scale(0.300000,1.000000),rotate(180.000000),translate(-0.500000,-0.500000)" id="radialGradient-3">
+            <stop stop-color="#F8E71C" offset="0%"></stop>
+            <stop stop-color="#FF0044" offset="100%"></stop>
+        </radialGradient>
     </defs>
     <g>
-        <path d="M115.497674,261.08837 L115.497674,154.478845 L23.8139535,101.729261 L23.8139535,162.501763 L65.8104558,186.8486 L65.8104558,232.549219 L115.497674,261.08837 Z M139.311628,261.714907 L189.916577,232.563707 L189.916577,185.779949 L232.186047,161.285235 L232.186047,101.27387 L139.311628,154.895035 L139.311628,261.714907 Z M219.971965,80.8276886 L171.155386,52.5391067 L128.292316,77.4106841 L85.1040206,52.5141067 L35.8521355,81.1812296 L127.765737,134.063073 L219.971965,80.8276886 Z M0,222.211907 L0,74.4948807 L127.986799,0 L256,74.1820085 L256,221.978632 L127.983954,295.72283 L0,222.211907 Z" fill="#000000"></path>
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g></g>
+        <polygon fill="url(#radialGradient-3)" fill-rule="nonzero" mask="url(#mask-2)" points="0 0 20 0 20 6 0 6"></polygon>
+    </g>
+</svg>
+`;
+
+export const svgWithStyleAndScript = `
+<svg width="600px" height="400px" viewBox="0 0 600 400" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
+    <style>
+      @import url(main.css);
+    </style>
+    <style>
+      circle:last-child {
+        fill: green;
+      }
+    </style>
+    <script type="text/javascript">
+      <![CDATA[
+        function change(evt) {
+          var target = evt.target;
+          var radius = target.getAttribute("r");
+
+          if (radius == 200) {
+            radius = 100;
+          } else {
+            radius = 200;
+          }
+
+          target.setAttribute("r", radius);
+        }
+      ]]>
+    </script>
+    <g>
+        <circle fill="#DDDDDD" cx="200" cy="200" r="200" onclick="change(evt)"></circle>
+        <circle fill-opacity="0.8" fill="#000000" cx="400" cy="200" r="200"></circle>
     </g>
 </svg>
 `;

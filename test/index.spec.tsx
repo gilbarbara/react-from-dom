@@ -1,40 +1,55 @@
 declare var global: any;
 import React from 'react';
 
-import convert from '../src/index';
+import convert, { convertFromNode, convertFromString } from '../src/index';
 
-import { audio, form, panel, svg } from './__fixtures__/data';
+import { audio, form, panel, svg, svgWithStyleAndScript } from './__fixtures__/data';
 
 const ReactMarkdown: React.FC = ({ children }) => <div>{children}</div>;
 
 describe('react-from-dom', () => {
-  it('should convert an SVG from string', () => {
-    const component: React.ElementType = convert(svg, {
+  it('should convert an SVG from a string', () => {
+    const node: Node = convertFromString(svg, { nodeOnly: true });
+
+    expect(node).toMatchSnapshot();
+
+    const element: React.ElementType = convert(node);
+
+    const wrapper = global.mount(element);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should convert an SVG with style and script from a string', () => {
+    const element: React.ElementType = convert(svgWithStyleAndScript, {
       selector: 'svg',
-      type: 'image/svg+xml',
     });
-    const wrapper = global.mount(component);
+    const wrapper = global.mount(element);
 
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should convert a search form from string', () => {
-    const component: React.ElementType = convert(form);
-    const wrapper = global.mount(component);
+  it('should convert a search form from a string', () => {
+    const element: React.ElementType = convert(form);
+    const wrapper = global.mount(element);
 
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should convert an audio from Node', () => {
-    const component: React.ElementType = convert(audio as Node);
-    const wrapper = global.mount(component);
+    const element: React.ElementType = convert(audio as Node);
+    const wrapper = global.mount(element);
 
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should handle actions', () => {
-    const component: React.ElementType = convert(panel, {
+    // @ts-ignore
+    const element: React.ElementType = convert(panel, {
       actions: [
+        {
+          condition: node => node.nodeName.toLowerCase() === 'code',
+          pre: () => null,
+        },
         {
           condition: node => node.nodeName.toLowerCase() === 'pre',
           post: (node, key) => (
@@ -71,16 +86,16 @@ describe('react-from-dom', () => {
       ],
       selector: 'div',
     });
-    const wrapper = global.mount(component);
+    const wrapper = global.mount(element);
 
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should handle broken markup', () => {
-    const component: React.ElementType = convert('<div><span>los</span>', {
+    const element: React.ElementType = convert('<div><span>los</span>', {
       selector: 'div',
     });
-    const wrapper = global.mount(component);
+    const wrapper = global.mount(element);
 
     expect(wrapper).toMatchSnapshot();
   });
@@ -93,9 +108,18 @@ describe('react-from-dom', () => {
     expect(convert(() => ({}))).toBeNull();
 
     // @ts-ignore
-    expect(convert('This is not a test')).toBeNull();
+    expect(convertFromNode()).toBeNull();
 
     // @ts-ignore
-    expect(convert([])).toBeNull();
+    expect(convertFromNode('This is not a test')).toBeNull();
+
+    // @ts-ignore
+    expect(convertFromString()).toBeNull();
+
+    // @ts-ignore
+    expect(convertFromString([])).toBeNull();
+
+    // @ts-ignore
+    expect(convertFromString('This is a test')).toBeNull();
   });
 });

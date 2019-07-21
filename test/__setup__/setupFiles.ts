@@ -28,3 +28,20 @@ window.matchMedia = () => ({
   matches: false,
   removeListener: () => ({}),
 });
+
+// tslint:disable:no-console
+const consoleError = console.error;
+console.error = jest.fn(error => {
+  const skipMessages = ['Expected `%s` listener', 'Error parsing input'];
+
+  if (
+    (typeof error === 'string' && skipMessages.some(d => error.indexOf(d) >= 0)) ||
+    (error instanceof Error && skipMessages.some(d => error.message.indexOf(d) >= 0))
+  ) {
+    return;
+  }
+
+  consoleError(error);
+});
+
+console.warn = jest.fn();
