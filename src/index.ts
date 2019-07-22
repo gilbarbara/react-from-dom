@@ -1,5 +1,5 @@
 import React from 'react';
-import { noTextChildNodes, possibleStandardNames } from './helpers';
+import { noTextChildNodes, possibleStandardNames, styleToObject } from './helpers';
 
 interface IOptions {
   actions?: IAction[];
@@ -12,6 +12,7 @@ interface IOptions {
 
 interface IAttributes {
   key: string;
+
   [key: string]: any;
 }
 
@@ -39,27 +40,24 @@ function parseAttributes(node, reactKey) {
     attributes.className = nodeClassNames;
   }
 
-  [...node.attributes].map(d => {
+  [...node.attributes].forEach(d => {
     switch (d.name) {
       // these are manually handled above, so break;
       case 'class':
+        break;
       case 'style':
+        attributes[d.name] = styleToObject(d.value);
         break;
       case 'checked':
-      case 'selected':
       case 'disabled':
+      case 'selected':
       case 'autoplay':
       case 'controls':
         attributes[d.name] = d.name;
         break;
       default:
-        if (possibleStandardNames[d.name]) {
-          attributes[possibleStandardNames[d.name]] = d.value;
-        } else {
-          attributes[d.name] = d.value;
-        }
+        attributes[possibleStandardNames[d.name] || d.name] = d.value;
     }
-    return null;
   });
 
   return attributes;

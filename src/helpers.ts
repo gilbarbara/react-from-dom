@@ -1,3 +1,20 @@
+export const styleToObject = input => {
+  const attributes = input.split(/ ?; ?/);
+  const output = attributes.reduce((acc, d) => {
+    const [key, value] = d.split(/ ?: ?/);
+
+    if (key && value) {
+      const valueParsed = Number.isNaN(Number(value)) ? value : Number(value);
+
+      acc[key.replace(/-(\w)/g, ($0, $1) => $1.toUpperCase())] = valueParsed;
+    }
+
+    return acc;
+  }, {});
+
+  return output;
+};
+
 export const noTextChildNodes = [
   'br',
   'col',

@@ -61,11 +61,10 @@ export const svg = `
         </radialGradient>
     </defs>
     <g>
-        <mask id="mask-2" fill="white">
+        <mask id="mask-2" style="fill: #fff;">
             <use xlink:href="#path-1"></use>
         </mask>
-        <g></g>
-        <polygon fill="url(#radialGradient-3)" fill-rule="nonzero" mask="url(#mask-2)" points="0 0 20 0 20 6 0 6"></polygon>
+        <polygon fill="url(#radialGradient-3)" fill-rule="nonzero" mask="url(#mask-2)" points="0 0 20 0 20 6 0 6" style="z-index: 100"></polygon>
     </g>
 </svg>
 `;
