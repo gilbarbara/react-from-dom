@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { noTextChildNodes, possibleStandardNames, styleToObject } from './helpers';
 
 interface IOptions {
@@ -12,8 +12,7 @@ interface IOptions {
 
 interface IAttributes {
   key: string;
-
-  [key: string]: any;
+  [index: string]: any;
 }
 
 export interface IAction {
@@ -29,42 +28,44 @@ export interface IAction {
   pre?: (node: Node, key: string, level: number) => Node;
 }
 
-function parseAttributes(node, reactKey) {
+function parseAttributes(node: Node, reactKey: string): IAttributes {
   const attributes: IAttributes = {
     key: reactKey,
   };
 
-  const nodeClassNames = node.getAttribute('class');
+  if (node instanceof Element) {
+    const nodeClassNames = node.getAttribute('class');
 
-  if (nodeClassNames) {
-    attributes.className = nodeClassNames;
-  }
-
-  [...node.attributes].forEach(d => {
-    switch (d.name) {
-      // these are manually handled above, so break;
-      case 'class':
-        break;
-      case 'style':
-        attributes[d.name] = styleToObject(d.value);
-        break;
-      case 'checked':
-      case 'disabled':
-      case 'selected':
-      case 'autoplay':
-      case 'controls':
-        attributes[d.name] = d.name;
-        break;
-      default:
-        attributes[possibleStandardNames[d.name] || d.name] = d.value;
+    if (nodeClassNames) {
+      attributes.className = nodeClassNames;
     }
-  });
+
+    [...node.attributes].forEach(d => {
+      switch (d.name) {
+        // these are manually handled above, so break;
+        case 'class':
+          break;
+        case 'style':
+          attributes[d.name] = styleToObject(d.value);
+          break;
+        case 'checked':
+        case 'disabled':
+        case 'selected':
+        case 'autoplay':
+        case 'controls':
+          attributes[d.name] = d.name;
+          break;
+        default:
+          attributes[possibleStandardNames[d.name] || d.name] = d.value;
+      }
+    });
+  }
 
   return attributes;
 }
 
-function parseChildren(childNodeList, level, options) {
-  const children = [...childNodeList]
+function parseChildren(childNodeList: NodeList, level: number, options: {}) {
+  const children: React.ReactNode[] = [...childNodeList]
     .map((node, index) =>
       convertFromNode(node, {
         ...options,
@@ -81,7 +82,7 @@ function parseChildren(childNodeList, level, options) {
   return children;
 }
 
-function parseName(nodeName) {
+function parseName(nodeName: string) {
   if (/[a-z]+[A-Z]+[a-z]+/.test(nodeName)) {
     return nodeName;
   }
@@ -89,7 +90,7 @@ function parseName(nodeName) {
   return nodeName.toLowerCase();
 }
 
-export function convertFromNode(input: Node, options: IOptions = {}) {
+export function convertFromNode(input: Node, options: IOptions = {}): React.ReactNode {
   if (!input || !(input instanceof Node)) {
     return null;
   }
@@ -102,7 +103,7 @@ export function convertFromNode(input: Node, options: IOptions = {}) {
 
   /* istanbul ignore else */
   if (Array.isArray(actions)) {
-    actions.forEach(action => {
+    actions.forEach((action: IAction) => {
       if (action.condition(node, key, level)) {
         if (typeof action.pre === 'function') {
           node = action.pre(node, key, level);
@@ -176,7 +177,7 @@ export function convertFromNode(input: Node, options: IOptions = {}) {
   }
 }
 
-export function convertFromString(input: string, options: IOptions = {}) {
+export function convertFromString(input: string, options: IOptions = {}): React.ReactNode | Node {
   if (!input || typeof input !== 'string') {
     return null;
   }
@@ -207,7 +208,10 @@ export function convertFromString(input: string, options: IOptions = {}) {
   return null;
 }
 
-export default function convert(input: Node | string, options: IOptions = {}) {
+export default function convert(
+  input: Node | string,
+  options: IOptions = {},
+): React.ReactNode | Node {
   if (typeof input === 'string') {
     return convertFromString(input, options);
   } else if (input instanceof Node) {

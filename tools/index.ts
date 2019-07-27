@@ -1,7 +1,7 @@
 import { promisify } from 'util';
 import { exec } from 'child_process';
 import chalk from 'chalk';
-import yargs from 'yargs';
+import * as yargs from 'yargs';
 
 const run = promisify(exec);
 

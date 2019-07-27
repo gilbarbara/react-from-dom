@@ -2,6 +2,7 @@ declare var global: any;
 declare var window: any;
 
 import Enzyme, { shallow, mount, render } from 'enzyme';
+// @ts-ignore
 import Adapter from 'enzyme-adapter-react-16';
 import { act } from 'react-dom/test-utils';
 
@@ -19,7 +20,7 @@ document.body.appendChild(react);
 
 global.skipEventLoop = () => new Promise(resolve => setImmediate(resolve));
 
-window.requestAnimationFrame = callback => {
+window.requestAnimationFrame = (callback: () => void) => {
   setTimeout(callback, 0);
 };
 

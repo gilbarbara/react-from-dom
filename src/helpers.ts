@@ -1,18 +1,20 @@
-export const styleToObject = input => {
+interface IObject {
+  [key: string]: any;
+}
+
+export const styleToObject = (input: string) => {
   const attributes = input.split(/ ?; ?/);
-  const output = attributes.reduce((acc, d) => {
+  return attributes.reduce((acc: IObject, d: string) => {
     const [key, value] = d.split(/ ?: ?/);
 
     if (key && value) {
-      const valueParsed = Number.isNaN(Number(value)) ? value : Number(value);
-
-      acc[key.replace(/-(\w)/g, ($0, $1) => $1.toUpperCase())] = valueParsed;
+      acc[key.replace(/-(\w)/g, ($0, $1) => $1.toUpperCase())] = Number.isNaN(Number(value))
+        ? value
+        : Number(value);
     }
 
     return acc;
   }, {});
-
-  return output;
 };
 
 export const noTextChildNodes = [
@@ -48,7 +50,7 @@ export const noTextChildNodes = [
 
 // Taken from https://raw.githubusercontent.com/facebook/react/baff5cc2f69d30589a5dc65b089e47765437294b/packages/react-dom/src/shared/possibleStandardNames.js
 // tslint:disable:object-literal-sort-keys
-export const possibleStandardNames = {
+export const possibleStandardNames: IObject = {
   // HTML
   'accept-charset': 'acceptCharset',
   acceptcharset: 'acceptCharset',

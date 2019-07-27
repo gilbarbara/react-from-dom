@@ -1,5 +1,5 @@
 declare var global: any;
-import React from 'react';
+import * as React from 'react';
 
 import convert, { convertFromNode, convertFromString } from '../src/index';
 
@@ -9,18 +9,19 @@ const ReactMarkdown: React.FC = ({ children }) => <div>{children}</div>;
 
 describe('react-from-dom', () => {
   it('should convert an SVG from a string', () => {
-    const node: Node = convertFromString(svg, { nodeOnly: true });
+    const node = convertFromString(svg, { nodeOnly: true });
 
     expect(node).toMatchSnapshot();
 
-    const element: React.ElementType = convert(node);
+    // @ts-ignore
+    const element: React.ReactNode = convert(node);
 
     const wrapper = global.mount(element);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should convert an SVG with style and script from a string', () => {
-    const element: React.ElementType = convert(svgWithStyleAndScript, {
+    const element: React.ReactNode = convert(svgWithStyleAndScript, {
       selector: 'svg',
     });
     const wrapper = global.mount(element);
@@ -29,14 +30,14 @@ describe('react-from-dom', () => {
   });
 
   it('should convert a search form from a string', () => {
-    const element: React.ElementType = convert(form);
+    const element: React.ReactNode = convert(form);
     const wrapper = global.mount(element);
 
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should convert an audio from Node', () => {
-    const element: React.ElementType = convert(audio as Node);
+    const element: React.ReactNode = convert(audio as Node);
     const wrapper = global.mount(element);
 
     expect(wrapper).toMatchSnapshot();
@@ -92,7 +93,7 @@ describe('react-from-dom', () => {
   });
 
   it('should handle broken markup', () => {
-    const element: React.ElementType = convert('<div><span>los</span>', {
+    const element: React.ReactNode = convert('<div><span>los</span>', {
       selector: 'div',
     });
     const wrapper = global.mount(element);
