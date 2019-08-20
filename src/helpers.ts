@@ -8,7 +8,7 @@ export const styleToObject = (input: string) => {
     const [key, value] = d.split(/ ?: ?/);
 
     if (key && value) {
-      acc[key.replace(/-(\w)/g, ($0, $1) => $1.toUpperCase())] = Number.isNaN(Number(value))
+      acc[key.replace(/-(\w)/g, (_$0, $1) => $1.toUpperCase())] = Number.isNaN(Number(value))
         ? value
         : Number(value);
     }
