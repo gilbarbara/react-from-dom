@@ -33,6 +33,7 @@ function parseAttributes(node: Node, reactKey: string): IAttributes {
     key: reactKey,
   };
 
+  /* istanbul ignore else */
   if (node instanceof Element) {
     const nodeClassNames = node.getAttribute('class');
 
@@ -144,7 +145,7 @@ export function convertFromNode(input: Node, options: IOptions = {}): React.Reac
       const nodeText = node.nodeValue!.toString();
 
       /* istanbul ignore else */
-      if (!/[a-zA-Z0-9_]+/.test(nodeText)) {
+      if (/^\s+$/.test(nodeText)) {
         return null;
       }
 
