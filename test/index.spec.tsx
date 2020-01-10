@@ -1,9 +1,10 @@
-declare var global: any;
 import * as React from 'react';
 
 import convert, { convertFromNode, convertFromString } from '../src/index';
 
 import { audio, form, panel, svg, svgWithStyleAndScript } from './__fixtures__/data';
+
+declare let global: any;
 
 const ReactMarkdown: React.FC = ({ children }) => <div>{children}</div>;
 
@@ -78,6 +79,7 @@ describe('react-from-dom', () => {
           condition: node => node instanceof HTMLElement && node.classList.contains('panel'),
           pre: node => {
             if (node instanceof HTMLElement) {
+              // eslint-disable-next-line no-param-reassign
               node.className += ' panel--fixed';
             }
 

@@ -1,10 +1,10 @@
-interface IObject {
+interface PlainObject {
   [key: string]: any;
 }
 
 export const styleToObject = (input: string) => {
   const attributes = input.split(/ ?; ?/);
-  return attributes.reduce((acc: IObject, d: string) => {
+  return attributes.reduce((acc: PlainObject, d: string) => {
     const [key, value] = d.split(/ ?: ?/);
 
     if (key && value) {
@@ -50,7 +50,7 @@ export const noTextChildNodes = [
 
 // Taken from https://raw.githubusercontent.com/facebook/react/baff5cc2f69d30589a5dc65b089e47765437294b/packages/react-dom/src/shared/possibleStandardNames.js
 // tslint:disable:object-literal-sort-keys
-export const possibleStandardNames: IObject = {
+export const possibleStandardNames: PlainObject = {
   // HTML
   'accept-charset': 'acceptCharset',
   acceptcharset: 'acceptCharset',

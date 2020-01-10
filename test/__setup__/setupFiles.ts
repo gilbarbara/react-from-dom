@@ -1,12 +1,11 @@
-declare var global: any;
-declare var window: any;
-
 import Enzyme, { shallow, mount, render } from 'enzyme';
 // @ts-ignore
 import Adapter from 'enzyme-adapter-react-16';
 import { act } from 'react-dom/test-utils';
 
 Enzyme.configure({ adapter: new Adapter() });
+
+declare let global: any;
 
 global.act = act;
 global.shallow = shallow;
@@ -20,17 +19,17 @@ document.body.appendChild(react);
 
 global.skipEventLoop = () => new Promise(resolve => setImmediate(resolve));
 
-window.requestAnimationFrame = (callback: () => void) => {
+global.requestAnimationFrame = (callback: () => void) => {
   setTimeout(callback, 0);
 };
 
-window.matchMedia = () => ({
+global.matchMedia = () => ({
   addListener: () => ({}),
   matches: false,
   removeListener: () => ({}),
 });
 
-// tslint:disable:no-console
+/*eslint-disable no-console */
 const consoleError = console.error;
 console.error = jest.fn(error => {
   const skipMessages = ['Expected `%s` listener', 'Error parsing input'];

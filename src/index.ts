@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import * as React from 'react';
 import { noTextChildNodes, possibleStandardNames, styleToObject } from './helpers';
 
-interface IOptions {
-  actions?: IAction[];
+interface Options {
+  actions?: Action[];
   index?: number;
   level?: number;
   nodeOnly?: boolean;
@@ -10,12 +11,12 @@ interface IOptions {
   type?: string;
 }
 
-interface IAttributes {
+interface Attributes {
   key: string;
   [index: string]: any;
 }
 
-export interface IAction {
+export interface Action {
   // If this returns true, the two following functions are called if they are defined
   condition: (node: Node, key: string, level: number) => boolean;
 
@@ -28,8 +29,8 @@ export interface IAction {
   pre?: (node: Node, key: string, level: number) => Node;
 }
 
-function parseAttributes(node: Node, reactKey: string): IAttributes {
-  const attributes: IAttributes = {
+function parseAttributes(node: Node, reactKey: string): Attributes {
+  const attributes: Attributes = {
     key: reactKey,
   };
 
@@ -91,7 +92,7 @@ function parseName(nodeName: string) {
   return nodeName.toLowerCase();
 }
 
-export function convertFromNode(input: Node, options: IOptions = {}): React.ReactNode {
+export function convertFromNode(input: Node, options: Options = {}): React.ReactNode {
   if (!input || !(input instanceof Node)) {
     return null;
   }
@@ -104,7 +105,7 @@ export function convertFromNode(input: Node, options: IOptions = {}): React.Reac
 
   /* istanbul ignore else */
   if (Array.isArray(actions)) {
-    actions.forEach((action: IAction) => {
+    actions.forEach((action: Action) => {
       if (action.condition(node, key, level)) {
         if (typeof action.pre === 'function') {
           node = action.pre(node, key, level);
@@ -114,7 +115,7 @@ export function convertFromNode(input: Node, options: IOptions = {}): React.Reac
 
             /* istanbul ignore else */
             if (process.env.NODE_ENV !== 'production') {
-              // tslint:disable-next-line:no-console
+              // eslint-disable-next-line no-console
               console.warn(
                 'The `pre`-method always must return a valid DomNode (instanceof Node) - your modification will be ignored (Hint: if you want to render a React-component, use the `action`-method instead)',
               );
@@ -134,14 +135,16 @@ export function convertFromNode(input: Node, options: IOptions = {}): React.Reac
   }
 
   switch (node.nodeType) {
-    case 1: // regular dom-node
+    case 1: {
+      // regular dom-node
       return React.createElement(
         parseName(node.nodeName),
         parseAttributes(node, key),
         parseChildren(node.childNodes, level, options),
       );
-
-    case 3: // textnode
+    }
+    case 3: {
+      // textnode
       const nodeText = node.nodeValue!.toString();
 
       /* istanbul ignore else */
@@ -159,7 +162,7 @@ export function convertFromNode(input: Node, options: IOptions = {}): React.Reac
       if (noTextChildNodes.indexOf(parentNodeName) !== -1) {
         /* istanbul ignore else */
         if (/\S/.test(nodeText)) {
-          // tslint:disable-next-line:no-console
+          // eslint-disable-next-line no-console
           console.warn(
             `A textNode is not allowed inside '${parentNodeName}'. Your text "${nodeText}" will be ignored`,
           );
@@ -168,17 +171,19 @@ export function convertFromNode(input: Node, options: IOptions = {}): React.Reac
       }
 
       return nodeText;
-
-    case 8: // html-comment
+    }
+    case 8: {
+      // html-comment
       return null;
-
+    }
     /* istanbul ignore next */
-    default:
+    default: {
       return null;
+    }
   }
 }
 
-export function convertFromString(input: string, options: IOptions = {}): React.ReactNode | Node {
+export function convertFromString(input: string, options: Options = {}): React.ReactNode | Node {
   if (!input || typeof input !== 'string') {
     return null;
   }
@@ -201,7 +206,7 @@ export function convertFromString(input: string, options: IOptions = {}): React.
   } catch (error) {
     /* istanbul ignore else */
     if (process.env.NODE_ENV !== 'production') {
-      // tslint:disable-next-line:no-console
+      // eslint-disable-next-line no-console
       console.error(error);
     }
   }
@@ -211,11 +216,13 @@ export function convertFromString(input: string, options: IOptions = {}): React.
 
 export default function convert(
   input: Node | string,
-  options: IOptions = {},
+  options: Options = {},
 ): React.ReactNode | Node {
   if (typeof input === 'string') {
     return convertFromString(input, options);
-  } else if (input instanceof Node) {
+  }
+
+  if (input instanceof Node) {
     return convertFromNode(input, options);
   }
 
