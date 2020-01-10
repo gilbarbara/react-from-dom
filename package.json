@@ -12,10 +12,13 @@
   },
   "homepage": "https://github.com/gilbarbara/react-from-dom#readme",
   "main": "lib/index.js",
+  "module": "esm/index.js",
   "files": [
+    "esm",
     "lib"
   ],
-  "types": "lib/index.d.ts",
+  "types": "./lib",
+  "sideEffects": false,
   "license": "MIT",
   "keywords": [
     "string",
@@ -37,6 +40,7 @@
     "@types/react-dom": "^16.9.4",
     "@typescript-eslint/eslint-plugin": "^2.14.0",
     "@typescript-eslint/parser": "^2.14.0",
+    "del-cli": "^3.0.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.8.0",
@@ -65,10 +69,11 @@
     "typescript": "^3.7.4"
   },
   "scripts": {
-    "build": "npm run clean && npm run build:ts",
-    "build:ts": "tsc",
-    "watch": "npm run build:ts -- -w",
-    "clean": "rimraf lib",
+    "build": "npm run clean && npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc",
+    "build:esm": "tsc -m es6 --outDir esm",
+    "clean": "del lib/* && del esm/*",
+    "watch": "npm run build:esm && npm run build:cjs -- -w",
     "test": "is-ci \"test:coverage\" \"test:watch\"",
     "test:coverage": "jest --coverage --bail",
     "test:watch": "jest --watch --verbose",
@@ -87,6 +92,10 @@
   "size-limit": [
     {
       "path": "./lib/index.js",
+      "limit": "5 kB"
+    },
+    {
+      "path": "./esm/index.js",
       "limit": "5 kB"
     }
   ],
