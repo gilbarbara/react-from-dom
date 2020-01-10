@@ -8,6 +8,7 @@ interface IOptions {
   nodeOnly?: boolean;
   selector?: string;
   type?: string;
+  keyPrefix?: string;
 }
 
 interface IAttributes {
