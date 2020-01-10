@@ -145,7 +145,10 @@ You can mutate/update a Node before the conversion or replace it  with a ReactNo
 }
 ```
 
+## Browser Support
 
+If you need to support legacy browsers you'll need to include a polyfiil for `Number.isNaN` in your app.  
+Take a look at [react-app-polyfill](https://www.npmjs.com/package/react-app-polyfill) or [polyfill.io](https://polyfill.io/v3/).
 
 ## Credits
 
