@@ -96,10 +96,10 @@ export function convertFromNode(input: Node, options: IOptions = {}): React.Reac
     return null;
   }
 
-  const { actions = [], index = 0, level = 0 } = options;
+  const { actions = [], index = 0, level = 0, keyPrefix = '' } = options;
 
   let node = input;
-  const key = `${level}-${index}`;
+  const key = `${keyPrefix}${level}-${index}`;
   const result: Array<Node | React.ReactNode> = [];
 
   /* istanbul ignore else */
