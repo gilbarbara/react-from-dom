@@ -101,3 +101,5 @@ export const svgWithStyleAndScript = `
     </g>
 </svg>
 `;
+
+export const keyPrefix = document.createElement('div');

@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import convert, { convertFromNode, convertFromString } from '../src/index';
 
-import { audio, form, panel, svg, svgWithStyleAndScript } from './__fixtures__/data';
+import { audio, form, panel, svg, svgWithStyleAndScript, keyPrefix } from './__fixtures__/data';
 
 const ReactMarkdown: React.FC = ({ children }) => <div>{children}</div>;
 
@@ -123,4 +123,10 @@ describe('react-from-dom', () => {
     // @ts-ignore
     expect(convertFromString('This is a test')).toBeNull();
   });
+
+  it('should allow custom key prefixes', () => {
+    const element: React.ReactNode = convertFromNode(keyPrefix as Node, {keyPrefix: 'test-'});
+
+    expect((element as any).key).toEqual('test-0-0');
+  })
 });
