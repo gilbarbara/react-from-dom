@@ -2,7 +2,7 @@
 
 [![NPM version](https://badge.fury.io/js/react-from-dom.svg)](https://www.npmjs.com/package/react-from-dom) [![build status](https://travis-ci.org/gilbarbara/react-from-dom.svg)](https://travis-ci.org/gilbarbara/react-from-dom) [![Maintainability](https://api.codeclimate.com/v1/badges/8b7357d2d51cd2ee7f8e/maintainability)](https://codeclimate.com/github/gilbarbara/react-from-dom/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/8b7357d2d51cd2ee7f8e/test_coverage)](https://codeclimate.com/github/gilbarbara/react-from-dom/test_coverage)
 
-Convert HTML/XML source code or a DOM node to a React element.  
+Convert HTML/XML source code or a DOM node to a React element.
 The perfect replacement for React's `dangerouslySetInnerHTML`
 
 
@@ -60,23 +60,25 @@ const App = () => (
 
 The function accepts two parameters:
 
-**input** {string|Node}  - *required*  
+**input** {string|Node}  - *required*
 An HTML/XML source code string or a DOM node.
 
 **options** {object} - optional
 
-- **actions** {Action[]}  
-  An array of actions to parse your input before converting.  
+- **actions** {Action[]}
+  An array of actions to parse your input before converting.
   Read about them below.
-- **nodeOnly** {boolean}  
-  Return the DOM Node instead of a React Element.  
+- **nodeOnly** {boolean}
+  Return the DOM Node instead of a React Element.
   *Only used for string inputs.*
-- **selector** {string}  
-  The CSS selector used to get your entry. Default: `body > *`  
+- **selector** {string}
+  The CSS selector used to get your entry. Default: `body > *`
   *Only used for string inputs.*
-- **type** {string}  
-  The mimeType used by DOMParser's parseFromString. Default: `text/html`  
+- **type** {string}
+  The mimeType used by DOMParser's parseFromString. Default: `text/html`
   *Only used for string inputs.*
+- **keyPrefix** {string}
+  A prefix for each component's `key` property. Default: `""`
 
 ### Actions
 
@@ -94,6 +96,29 @@ You can mutate/update a Node before the conversion or replace it  with a ReactNo
   // Use this to inject a component or remove the node
   // It must return something that can be rendered by React
   post?: (node: Node, key: string, level: number) => React.ReactNode;
+}
+```
+
+### Keys
+
+Each component generated is assigned its own unique `key`, based on its depth in the tree, and its index in its siblings.
+
+If you are rendering multiple generated components, you may need to provide a `keyPrefix` for each use to ensure no two siblings share a key.
+
+```javascript
+jsx
+import React from 'react';
+import convert from 'react-from-dom';
+
+function MyComponent({ items: {id: string, label: string}[] }) {
+  return (
+    <ul>
+      {items.map(item => {
+        const Node = convert(item.label, {keyPrefix: item.id});
+        <li> <Node /> </li>
+      })}
+    </ul>
+  )
 }
 ```
 
@@ -135,11 +160,11 @@ You can mutate/update a Node before the conversion or replace it  with a ReactNo
   condition: node => node.nodeName.toLowerCase() === 'ul',
   pre: (node) => {
     const ol = document.createElement('ol');
-    
+
     [...node.childNodes].forEach(child => {
       ol.appendChild(child);
     });
-    
+
     return ol;
   }
 }
@@ -150,4 +175,3 @@ You can mutate/update a Node before the conversion or replace it  with a ReactNo
 ## Credits
 
 This is a fork from [dom-to-react](https://github.com/diva-e/dom-to-react) package. Thanks! ❤️
-
