@@ -15,9 +15,10 @@
   "globals": {
     "cy": false
   },
-  "plugins": ["prettier"],
+  "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "no-restricted-syntax": ["error", "DebuggerStatement", "LabeledStatement", "WithStatement"],
+    "no-use-before-define": ["error", "nofunc"],
     "spaced-comment": [
       "warn",
       "always",
@@ -31,7 +32,6 @@
         ]
       }
     ],
-    "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": ["warn", { "ignoreRestSiblings": true }],
     "@typescript-eslint/explicit-function-return-type": "off",
