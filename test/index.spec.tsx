@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import convert, { convertFromNode, convertFromString } from '../src/index';
 
-import { audio, form, panel, svg, svgWithStyleAndScript } from './__fixtures__/data';
+import { audio, form, iframe, panel, svg, svgWithStyleAndScript, utf8 } from './__fixtures__/data';
 
 declare let global: any;
 
@@ -30,8 +30,22 @@ describe('react-from-dom', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should handle UTF8 text', () => {
+    const element: React.ReactNode = convert(utf8);
+    const wrapper = global.mount(element);
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should convert a search form from a string', () => {
     const element: React.ReactNode = convert(form);
+    const wrapper = global.mount(element);
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should convert an iframe from a string', () => {
+    const element: React.ReactNode = convert(iframe);
     const wrapper = global.mount(element);
 
     expect(wrapper).toMatchSnapshot();
@@ -49,22 +63,22 @@ describe('react-from-dom', () => {
     const element: React.ElementType = convert(panel, {
       actions: [
         {
-          condition: node => node.nodeName.toLowerCase() === 'code',
+          condition: (node) => node.nodeName.toLowerCase() === 'code',
           pre: () => null,
         },
         {
-          condition: node => node.nodeName.toLowerCase() === 'pre',
+          condition: (node) => node.nodeName.toLowerCase() === 'pre',
           post: (node, key) => (
             // @ts-ignore
             <ReactMarkdown key={key} source={node.textContent} />
           ),
         },
         {
-          condition: node => node.nodeName.toLowerCase() === 'ul',
-          pre: node => {
+          condition: (node) => node.nodeName.toLowerCase() === 'ul',
+          pre: (node) => {
             const ol = document.createElement('ol');
 
-            [...node.childNodes].forEach(child => {
+            [...node.childNodes].forEach((child) => {
               ol.appendChild(child);
             });
 
@@ -72,12 +86,12 @@ describe('react-from-dom', () => {
           },
         },
         {
-          condition: node => node instanceof HTMLElement && node.className === 'panel-footer',
+          condition: (node) => node instanceof HTMLElement && node.className === 'panel-footer',
           post: () => null,
         },
         {
-          condition: node => node instanceof HTMLElement && node.classList.contains('panel'),
-          pre: node => {
+          condition: (node) => node instanceof HTMLElement && node.classList.contains('panel'),
+          pre: (node) => {
             if (node instanceof HTMLElement) {
               // eslint-disable-next-line no-param-reassign
               node.className += ' panel--fixed';

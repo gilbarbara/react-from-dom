@@ -13,6 +13,7 @@ interface Options {
 
 interface Attributes {
   key: string;
+
   [index: string]: any;
 }
 
@@ -42,20 +43,40 @@ function parseAttributes(node: Node, reactKey: string): Attributes {
       attributes.className = nodeClassNames;
     }
 
-    [...node.attributes].forEach(d => {
+    [...node.attributes].forEach((d) => {
       switch (d.name) {
-        // these are manually handled above, so break;
+        // this is manually handled above, so break;
         case 'class':
           break;
         case 'style':
           attributes[d.name] = styleToObject(d.value);
           break;
-        case 'checked':
-        case 'disabled':
-        case 'selected':
+        case 'allowfullscreen':
+        case 'allowpaymentrequest':
+        case 'async':
+        case 'autofocus':
         case 'autoplay':
+        case 'checked':
         case 'controls':
-          attributes[d.name] = d.name;
+        case 'default':
+        case 'defer':
+        case 'disabled':
+        case 'formnovalidate':
+        case 'hidden':
+        case 'ismap':
+        case 'itemscope':
+        case 'loop':
+        case 'multiple':
+        case 'muted':
+        case 'nomodule':
+        case 'novalidate':
+        case 'open':
+        case 'readonly':
+        case 'required':
+        case 'reversed':
+        case 'selected':
+        case 'typemustmatch':
+          attributes[possibleStandardNames[d.name] || d.name] = true;
           break;
         default:
           attributes[possibleStandardNames[d.name] || d.name] = d.value;
@@ -66,7 +87,7 @@ function parseAttributes(node: Node, reactKey: string): Attributes {
   return attributes;
 }
 
-function parseChildren(childNodeList: NodeList, level: number, options: {}) {
+function parseChildren(childNodeList: NodeList, level: number, options: Options) {
   const children: React.ReactNode[] = [...childNodeList]
     .map((node, index) =>
       convertFromNode(node, {
@@ -117,7 +138,7 @@ export function convertFromNode(input: Node, options: Options = {}): React.React
             if (process.env.NODE_ENV !== 'production') {
               // eslint-disable-next-line no-console
               console.warn(
-                'The `pre`-method always must return a valid DomNode (instanceof Node) - your modification will be ignored (Hint: if you want to render a React-component, use the `action`-method instead)',
+                'The `pre` method always must return a valid DomNode (instanceof Node) - your modification will be ignored (Hint: if you want to render a React-component, use the `post` method instead)',
               );
             }
           }

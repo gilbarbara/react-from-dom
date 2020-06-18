@@ -41,14 +41,14 @@ exports[`react-from-dom should convert a search form from a string 1`] = `
     </option>
     <option
       key="2-5"
-      selected="selected"
+      selected={true}
       value="cat"
     >
       Cat
     </option>
   </select>
   <input
-    checked="checked"
+    checked={true}
     key="1-9"
     name="visible"
     type="checkbox"
@@ -311,11 +311,37 @@ exports[`react-from-dom should convert an SVG with style and script from a strin
 
 exports[`react-from-dom should convert an audio from Node 1`] = `
 <audio
-  controls="controls"
+  controls={true}
   src="https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3"
 >
   Your browser does not support the audio element.
 </audio>
+`;
+
+exports[`react-from-dom should convert an iframe from a string 1`] = `
+<iframe
+  allow="autoplay; encrypted-media"
+  allowFullScreen={true}
+  frameBorder="0"
+  height="270"
+  src="https://www.youtube.com/embed/kemF0xdmsaY?feature=oembed"
+  width="480"
+/>
+`;
+
+exports[`react-from-dom should handle UTF8 text 1`] = `
+<svg>
+  <tspan
+    baselineShift="0%"
+    fill="#E4E9F2"
+    fontFamily="斯柯达体"
+    fontSize="20"
+    key="1-1"
+    xmlSpace="preserve"
+  >
+    眼观：仪表盘、车辆
+  </tspan>
+</svg>
 `;
 
 exports[`react-from-dom should handle actions 1`] = `

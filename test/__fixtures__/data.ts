@@ -26,6 +26,9 @@ export const form = `
 </form>
 `;
 
+export const iframe =
+  '<iframe width="480" height="270" src="https://www.youtube.com/embed/kemF0xdmsaY?feature=oembed" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+
 export const panel = `
 <div class="panel">
   <div class="panel-header">
@@ -49,6 +52,12 @@ export const panel = `
     Footer
   </div>
 </div>
+`;
+
+export const utf8 = `
+<svg>
+  <tspan baseline-shift="0%" font-family="斯柯达体" font-size="20" fill="#E4E9F2" xml:space="preserve">眼观：仪表盘、车辆</tspan>
+</svg>
 `;
 
 export const svg = `

@@ -1,10 +1,6 @@
-interface PlainObject {
-  [key: string]: any;
-}
-
-export const styleToObject = (input: string) => {
+export const styleToObject = (input: string): Record<string, any> => {
   const attributes = input.split(/ ?; ?/);
-  return attributes.reduce((acc: PlainObject, d: string) => {
+  return attributes.reduce((acc: Record<string, any>, d: string) => {
     const [key, value] = d.split(/ ?: ?/);
 
     if (key && value) {
@@ -50,7 +46,7 @@ export const noTextChildNodes = [
 
 // Taken from https://raw.githubusercontent.com/facebook/react/baff5cc2f69d30589a5dc65b089e47765437294b/packages/react-dom/src/shared/possibleStandardNames.js
 // tslint:disable:object-literal-sort-keys
-export const possibleStandardNames: PlainObject = {
+export const possibleStandardNames: Record<string, any> = {
   // HTML
   'accept-charset': 'acceptCharset',
   acceptcharset: 'acceptCharset',
@@ -116,6 +112,7 @@ export const possibleStandardNames: PlainObject = {
   srclang: 'srcLang',
   srcset: 'srcSet',
   tabindex: 'tabIndex',
+  typemustmatch: 'typeMustMatch',
   usemap: 'useMap',
 
   // SVG
