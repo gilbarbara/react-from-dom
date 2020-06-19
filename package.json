@@ -15,7 +15,8 @@
   "module": "esm/index.js",
   "files": [
     "esm",
-    "lib"
+    "lib",
+    "src"
   ],
   "types": "./lib",
   "sideEffects": false,
@@ -74,7 +75,8 @@
     "build:cjs": "tsc",
     "build:esm": "tsc -m es6 --outDir esm",
     "clean": "del lib/* && del esm/*",
-    "watch": "npm run build:esm && npm run build:cjs -- -w",
+    "watch:cjs": "npm run build:cjs -- -w",
+    "watch:esm": "npm run build:esm -- -w",
     "test": "is-ci \"test:coverage\" \"test:watch\"",
     "test:coverage": "jest --coverage --bail",
     "test:watch": "jest --watch --verbose",
