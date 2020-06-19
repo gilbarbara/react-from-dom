@@ -1,6 +1,6 @@
 {
   "name": "react-from-dom",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Convert HTML/XML source code or DOM nodes to React elements",
   "author": "Gil Barbara <gilbarbara@gmail.com>",
   "repository": {
