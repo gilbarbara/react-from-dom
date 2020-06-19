@@ -59,11 +59,11 @@ describe('react-from-dom', () => {
   });
 
   it('should handle actions', () => {
-    // @ts-ignore
-    const element: React.ElementType = convert(panel, {
+    const element = convert(panel, {
       actions: [
         {
           condition: (node) => node.nodeName.toLowerCase() === 'code',
+          // @ts-ignore
           pre: () => null,
         },
         {
