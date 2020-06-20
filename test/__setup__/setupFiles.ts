@@ -1,5 +1,4 @@
 import Enzyme, { shallow, mount, render } from 'enzyme';
-// @ts-ignore
 import Adapter from 'enzyme-adapter-react-16';
 import { act } from 'react-dom/test-utils';
 

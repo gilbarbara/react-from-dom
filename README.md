@@ -154,3 +154,6 @@ Take a look at [react-app-polyfill](https://www.npmjs.com/package/react-app-poly
 
 This is a fork from [dom-to-react](https://github.com/diva-e/dom-to-react) package. Thanks! ❤️
 
+## License
+
+MIT

@@ -21,7 +21,6 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/test/__setup__/setupTests.ts'],
   testMatch: null,
   testRegex: '/test/.*?\\.(test|spec)\\.tsx?$',
-  testURL: 'http://localhost:1337/',
   verbose: false,
   watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
 };

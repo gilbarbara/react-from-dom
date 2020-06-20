@@ -1,10 +1,9 @@
 import * as React from 'react';
+import { mount } from 'enzyme';
 
 import convert, { convertFromNode, convertFromString } from '../src/index';
 
 import { audio, form, iframe, panel, svg, svgWithStyleAndScript, utf8 } from './__fixtures__/data';
-
-declare let global: any;
 
 const ReactMarkdown: React.FC = ({ children }) => <div>{children}</div>;
 
@@ -17,7 +16,7 @@ describe('react-from-dom', () => {
     // @ts-ignore
     const element: React.ReactNode = convert(node);
 
-    const wrapper = global.mount(element);
+    const wrapper = mount(element as React.ReactElement);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -25,35 +24,35 @@ describe('react-from-dom', () => {
     const element: React.ReactNode = convert(svgWithStyleAndScript, {
       selector: 'svg',
     });
-    const wrapper = global.mount(element);
+    const wrapper = mount(element as React.ReactElement);
 
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should handle UTF8 text', () => {
     const element: React.ReactNode = convert(utf8);
-    const wrapper = global.mount(element);
+    const wrapper = mount(element as React.ReactElement);
 
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should convert a search form from a string', () => {
     const element: React.ReactNode = convert(form);
-    const wrapper = global.mount(element);
+    const wrapper = mount(element as React.ReactElement);
 
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should convert an iframe from a string', () => {
     const element: React.ReactNode = convert(iframe);
-    const wrapper = global.mount(element);
+    const wrapper = mount(element as React.ReactElement);
 
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should convert an audio from Node', () => {
     const element: React.ReactNode = convert(audio as Node);
-    const wrapper = global.mount(element);
+    const wrapper = mount(element as React.ReactElement);
 
     expect(wrapper).toMatchSnapshot();
   });
@@ -103,7 +102,7 @@ describe('react-from-dom', () => {
       ],
       selector: 'div',
     });
-    const wrapper = global.mount(element);
+    const wrapper = mount(element as React.ReactElement);
 
     expect(wrapper).toMatchSnapshot();
   });
@@ -112,7 +111,7 @@ describe('react-from-dom', () => {
     const element: React.ReactNode = convert('<div><span>los</span>', {
       selector: 'div',
     });
-    const wrapper = global.mount(element);
+    const wrapper = mount(element as React.ReactElement);
 
     expect(wrapper).toMatchSnapshot();
   });
