@@ -400,24 +400,36 @@ exports[`react-from-dom should handle actions 1`] = `
       -argument
     
     </p>
-    <img
+    <p
       key="2-5"
+    >
+       
+    </p>
+    <p
+      key="2-7"
+    >
+      
+      This is the second paragraph
+    
+    </p>
+    <img
+      key="2-9"
     />
     EMPTY
     
     <ReactMarkdown
-      key="2-7"
+      key="2-11"
       source="This is a test"
     >
       <div />
     </ReactMarkdown>
     <code
-      key="2-9"
+      key="2-13"
     >
       throw new Error('Fail');
     </code>
     <dl
-      key="2-11"
+      key="2-15"
     />
   </div>
 </div>

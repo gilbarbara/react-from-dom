@@ -43,6 +43,10 @@ export const panel = `
       This Element has a <code>style</code> attribute.<br>
       It also shows how to use the <code>parser</code>-argument
     </p>
+    <p>&nbsp;</p>
+    <p>
+      This is the second paragraph
+    </p>
     <img>EMPTY</img>
     <pre>This is a test</pre>
     <code>throw new Error('Fail');</code>

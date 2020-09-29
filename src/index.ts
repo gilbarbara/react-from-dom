@@ -166,10 +166,10 @@ export function convertFromNode(input: Node, options: Options = {}): React.React
     }
     case 3: {
       // textnode
-      const nodeText = node.nodeValue!.toString();
+      const nodeText = node.nodeValue?.toString() || '';
 
       /* istanbul ignore else */
-      if (/^\s+$/.test(nodeText)) {
+      if (/^\s+$/.test(nodeText) && !/[\u202F\u00A0]/.test(nodeText)) {
         return null;
       }
 
