@@ -1,8 +1,0 @@
-{
-  "globals": {
-    "mount": true
-  },
-  "rules": {
-    "@typescript-eslint/ban-ts-comment": "off"
-  }
-}

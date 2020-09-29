@@ -12,10 +12,21 @@
     "browser": true,
     "jest": true
   },
+  "overrides": [
+    {
+      "globals": {
+        "mount": true
+      },
+      "files": ["test/**/*.ts?(x)"],
+      "rules": {
+        "@typescript-eslint/ban-ts-comment": "off"
+      }
+    }
+  ],
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "no-restricted-syntax": ["error", "DebuggerStatement", "LabeledStatement", "WithStatement"],
-    "no-use-before-define": ["error", "nofunc"],
+    "no-use-before-define": "off",
     "spaced-comment": [
       "warn",
       "always",
@@ -29,10 +40,14 @@
         ]
       }
     ],
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-unused-vars": ["warn", { "ignoreRestSiblings": true }],
     "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", { "ignoreRestSiblings": true }],
+    "@typescript-eslint/no-use-before-define": [
+      "warn",
+      { "functions": false, "classes": false, "variables": false, "typedefs": false }
+    ],
     "import/extensions": ["warn", "never"],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "import/prefer-default-export": "off",
