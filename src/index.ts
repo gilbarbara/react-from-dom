@@ -212,7 +212,7 @@ export function convertFromString(input: string, options: Options = {}): React.R
 
   try {
     const parser = new DOMParser();
-    const doc = parser.parseFromString(input, type as SupportedType);
+    const doc = parser.parseFromString(input, type as DOMParserSupportedType);
     const node = doc.querySelector(selector);
 
     if (!(node instanceof Node)) {
