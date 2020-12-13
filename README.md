@@ -1,6 +1,6 @@
 # react-from-dom
 
-[![NPM version](https://badge.fury.io/js/react-from-dom.svg)](https://www.npmjs.com/package/react-from-dom) [![build status](https://travis-ci.org/gilbarbara/react-from-dom.svg)](https://travis-ci.org/gilbarbara/react-from-dom) [![Maintainability](https://api.codeclimate.com/v1/badges/8b7357d2d51cd2ee7f8e/maintainability)](https://codeclimate.com/github/gilbarbara/react-from-dom/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/8b7357d2d51cd2ee7f8e/test_coverage)](https://codeclimate.com/github/gilbarbara/react-from-dom/test_coverage)
+[![NPM version](https://badge.fury.io/js/react-from-dom.svg)](https://www.npmjs.com/package/react-from-dom) [![Build Status](https://travis-ci.com/gilbarbara/react-from-dom.svg?branch=master)](https://travis-ci.com/gilbarbara/react-from-dom) [![Maintainability](https://api.codeclimate.com/v1/badges/8b7357d2d51cd2ee7f8e/maintainability)](https://codeclimate.com/github/gilbarbara/react-from-dom/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/8b7357d2d51cd2ee7f8e/test_coverage)](https://codeclimate.com/github/gilbarbara/react-from-dom/test_coverage)
 
 Convert HTML/XML source code or a DOM node to a React element.  
 The perfect replacement for React's `dangerouslySetInnerHTML`
