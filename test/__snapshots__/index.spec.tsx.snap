@@ -347,6 +347,7 @@ exports[`react-from-dom should handle UTF8 text 1`] = `
 exports[`react-from-dom should handle actions 1`] = `
 <div
   className="panel panel--fixed"
+  key="ABCDE-0-0"
 >
   <div
     className="panel-header"
@@ -420,9 +421,7 @@ exports[`react-from-dom should handle actions 1`] = `
     <ReactMarkdown
       key="2-11"
       source="This is a test"
-    >
-      <div />
-    </ReactMarkdown>
+    />
     <code
       key="2-13"
     >

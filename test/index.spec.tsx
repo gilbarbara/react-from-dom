@@ -1,9 +1,18 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 import convert, { convertFromNode, convertFromString } from '../src/index';
 
 import { audio, form, iframe, panel, svg, svgWithStyleAndScript, utf8 } from './__fixtures__/data';
+
+jest.mock('../src/helpers', () => {
+  const helpers = jest.requireActual('../src/helpers');
+
+  return {
+    ...helpers,
+    randomString: () => 'ABCDE',
+  };
+});
 
 const ReactMarkdown: React.FC = ({ children }) => <div>{children}</div>;
 
@@ -100,9 +109,10 @@ describe('react-from-dom', () => {
           },
         },
       ],
+      randomKey: true,
       selector: 'div',
     });
-    const wrapper = mount(element as React.ReactElement);
+    const wrapper = shallow(element as React.ReactElement);
 
     expect(wrapper).toMatchSnapshot();
   });
