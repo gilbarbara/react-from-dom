@@ -13,6 +13,17 @@ export const styleToObject = (input: string): Record<string, any> => {
   }, {});
 };
 
+/* istanbul ignore next */
+export function randomString(length = 6): string {
+  const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let result = '';
+
+  for (let i = length; i > 0; --i)
+    result += characters[Math.round(Math.random() * (characters.length - 1))];
+
+  return result;
+}
+
 export const noTextChildNodes = [
   'br',
   'col',

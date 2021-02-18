@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import * as React from 'react';
-import { noTextChildNodes, possibleStandardNames, styleToObject } from './helpers';
+import { noTextChildNodes, possibleStandardNames, randomString, styleToObject } from './helpers';
 
 interface Options {
   actions?: Action[];
   index?: number;
   level?: number;
   nodeOnly?: boolean;
+  randomKey?: boolean;
   selector?: string;
   type?: string;
 }
@@ -118,11 +119,15 @@ export function convertFromNode(input: Node, options: Options = {}): React.React
     return null;
   }
 
-  const { actions = [], index = 0, level = 0 } = options;
+  const { actions = [], index = 0, level = 0, randomKey } = options;
 
   let node = input;
-  const key = `${level}-${index}`;
+  let key = `${level}-${index}`;
   const result: Array<Node | React.ReactNode> = [];
+
+  if (randomKey && level === 0) {
+    key = `${randomString()}-${key}`;
+  }
 
   /* istanbul ignore else */
   if (Array.isArray(actions)) {
