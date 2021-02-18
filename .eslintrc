@@ -25,6 +25,7 @@
   ],
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
+    "no-plusplus": "off",
     "no-restricted-syntax": ["error", "DebuggerStatement", "LabeledStatement", "WithStatement"],
     "no-use-before-define": "off",
     "spaced-comment": [
