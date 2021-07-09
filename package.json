@@ -1,6 +1,6 @@
 {
   "name": "react-from-dom",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Convert HTML/XML source code or DOM nodes to React elements",
   "author": "Gil Barbara <gilbarbara@gmail.com>",
   "keywords": [
@@ -82,7 +82,9 @@
     "prepublishOnly": "npm run validate"
   },
   "eslintConfig": {
-    "extends": ["@gilbarbara/eslint-config"]
+    "extends": [
+      "@gilbarbara/eslint-config"
+    ]
   },
   "prettier": "@gilbarbara/prettier-config",
   "size-limit": [
