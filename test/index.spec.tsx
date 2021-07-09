@@ -1,9 +1,10 @@
+/* eslint-disable react/destructuring-assignment */
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
 
-import convert, { convertFromNode, convertFromString } from '../src/index';
-
 import { audio, form, iframe, panel, svg, svgWithStyleAndScript, utf8 } from './__fixtures__/data';
+
+import convert, { convertFromNode, convertFromString } from '../src/index';
 
 jest.mock('../src/helpers', () => {
   const helpers = jest.requireActual('../src/helpers');
@@ -14,7 +15,9 @@ jest.mock('../src/helpers', () => {
   };
 });
 
-const ReactMarkdown: React.FC = ({ children }) => <div>{children}</div>;
+function ReactMarkdown({ children }: React.PropsWithChildren<any>) {
+  return <div>{children}</div>;
+}
 
 describe('react-from-dom', () => {
   it('should convert an SVG from a string', () => {
@@ -26,6 +29,7 @@ describe('react-from-dom', () => {
     const element: React.ReactNode = convert(node);
 
     const wrapper = mount(element as React.ReactElement);
+
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -70,23 +74,23 @@ describe('react-from-dom', () => {
     const element = convert(panel, {
       actions: [
         {
-          condition: (node) => node.nodeName.toLowerCase() === 'code',
+          condition: node => node.nodeName.toLowerCase() === 'code',
           // @ts-ignore
           pre: () => null,
         },
         {
-          condition: (node) => node.nodeName.toLowerCase() === 'pre',
+          condition: node => node.nodeName.toLowerCase() === 'pre',
           post: (node, key) => (
             // @ts-ignore
             <ReactMarkdown key={key} source={node.textContent} />
           ),
         },
         {
-          condition: (node) => node.nodeName.toLowerCase() === 'ul',
-          pre: (node) => {
+          condition: node => node.nodeName.toLowerCase() === 'ul',
+          pre: node => {
             const ol = document.createElement('ol');
 
-            [...node.childNodes].forEach((child) => {
+            [...node.childNodes].forEach(child => {
               ol.appendChild(child);
             });
 
@@ -94,12 +98,12 @@ describe('react-from-dom', () => {
           },
         },
         {
-          condition: (node) => node instanceof HTMLElement && node.className === 'panel-footer',
+          condition: node => node instanceof HTMLElement && node.className === 'panel-footer',
           post: () => null,
         },
         {
-          condition: (node) => node instanceof HTMLElement && node.classList.contains('panel'),
-          pre: (node) => {
+          condition: node => node instanceof HTMLElement && node.classList.contains('panel'),
+          pre: node => {
             if (node instanceof HTMLElement) {
               // eslint-disable-next-line no-param-reassign
               node.className += ' panel--fixed';

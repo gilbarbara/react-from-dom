@@ -1,5 +1,6 @@
 export const styleToObject = (input: string): Record<string, any> => {
   const attributes = input.split(/ ?; ?/);
+
   return attributes.reduce((acc: Record<string, any>, d: string) => {
     const [key, value] = d.split(/ ?: ?/);
 
@@ -18,8 +19,9 @@ export function randomString(length = 6): string {
   const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   let result = '';
 
-  for (let i = length; i > 0; --i)
+  for (let i = length; i > 0; --i) {
     result += characters[Math.round(Math.random() * (characters.length - 1))];
+  }
 
   return result;
 }

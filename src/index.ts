@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import * as React from 'react';
+
 import { noTextChildNodes, possibleStandardNames, randomString, styleToObject } from './helpers';
 
 interface Options {
@@ -13,9 +14,9 @@ interface Options {
 }
 
 interface Attributes {
-  key: string;
-
   [index: string]: any;
+
+  key: string;
 }
 
 export interface Action {
@@ -44,7 +45,7 @@ function parseAttributes(node: Node, reactKey: string): Attributes {
       attributes.className = nodeClassNames;
     }
 
-    [...node.attributes].forEach((d) => {
+    [...node.attributes].forEach(d => {
       switch (d.name) {
         // this is manually handled above, so break;
         case 'class':
@@ -193,6 +194,7 @@ export function convertFromNode(input: Node, options: Options = {}): React.React
             `A textNode is not allowed inside '${parentNodeName}'. Your text "${nodeText}" will be ignored`,
           );
         }
+
         return null;
       }
 
@@ -213,6 +215,7 @@ export function convertFromString(input: string, options: Options = {}): React.R
   if (!input || typeof input !== 'string') {
     return null;
   }
+
   const { nodeOnly = false, selector = 'body > *', type = 'text/html' } = options;
 
   try {
