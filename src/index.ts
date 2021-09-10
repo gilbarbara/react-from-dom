@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { noTextChildNodes, possibleStandardNames, randomString, styleToObject } from './helpers';
 
-interface Options {
+export interface Options {
   actions?: Action[];
   index?: number;
   level?: number;
