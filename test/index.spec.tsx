@@ -1,6 +1,5 @@
-/* eslint-disable react/destructuring-assignment */
 import * as React from 'react';
-import { mount, shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import { audio, form, iframe, panel, svg, svgWithStyleAndScript, utf8 } from './__fixtures__/data';
 
@@ -20,54 +19,63 @@ function ReactMarkdown({ children }: React.PropsWithChildren<any>) {
 }
 
 describe('react-from-dom', () => {
+  beforeAll(() => {
+    jest.spyOn(console, 'error').mockImplementation();
+    jest.spyOn(console, 'warn').mockImplementation();
+  });
+
   it('should convert an SVG from a string', () => {
     const node = convertFromString(svg, { nodeOnly: true });
 
     expect(node).toMatchSnapshot();
 
-    // @ts-ignore
-    const element: React.ReactNode = convert(node);
+    const element = convert(node as Node) as React.ReactNode;
 
-    const wrapper = mount(element as React.ReactElement);
+    render(<div data-testid="wrapper">{element}</div>);
 
-    expect(wrapper).toMatchSnapshot();
+    expect(screen.getByTestId('wrapper')).toMatchSnapshot();
   });
 
   it('should convert an SVG with style and script from a string', () => {
-    const element: React.ReactNode = convert(svgWithStyleAndScript, {
+    const element = convert(svgWithStyleAndScript, {
       selector: 'svg',
-    });
-    const wrapper = mount(element as React.ReactElement);
+    }) as React.ReactNode;
 
-    expect(wrapper).toMatchSnapshot();
+    render(<div data-testid="wrapper">{element}</div>);
+
+    expect(screen.getByTestId('wrapper')).toMatchSnapshot();
   });
 
   it('should handle UTF8 text', () => {
-    const element: React.ReactNode = convert(utf8);
-    const wrapper = mount(element as React.ReactElement);
+    const element = convert(utf8) as React.ReactNode;
 
-    expect(wrapper).toMatchSnapshot();
+    render(<div data-testid="wrapper">{element}</div>);
+
+    expect(screen.getByTestId('wrapper')).toMatchSnapshot();
   });
 
   it('should convert a search form from a string', () => {
-    const element: React.ReactNode = convert(form);
-    const wrapper = mount(element as React.ReactElement);
+    const element = convert(form) as React.ReactNode;
 
-    expect(wrapper).toMatchSnapshot();
+    render(<div data-testid="wrapper">{element}</div>);
+
+    expect(screen.getByTestId('wrapper')).toMatchSnapshot();
   });
 
   it('should convert an iframe from a string', () => {
-    const element: React.ReactNode = convert(iframe);
-    const wrapper = mount(element as React.ReactElement);
+    const element = convert(iframe) as React.ReactNode;
 
-    expect(wrapper).toMatchSnapshot();
+    render(<div data-testid="wrapper">{element}</div>);
+
+    expect(screen.getByTestId('wrapper')).toMatchSnapshot();
   });
 
   it('should convert an audio from Node', () => {
-    const element: React.ReactNode = convert(audio as Node);
-    const wrapper = mount(element as React.ReactElement);
+    const element = convert(audio as Node) as React.ReactNode;
 
-    expect(wrapper).toMatchSnapshot();
+    render(<div data-testid="wrapper">{element}</div>);
+
+    expect(screen.getByTestId('wrapper')).toMatchSnapshot();
   });
 
   it('should handle actions', () => {
@@ -115,19 +123,21 @@ describe('react-from-dom', () => {
       ],
       randomKey: true,
       selector: 'div',
-    });
-    const wrapper = shallow(element as React.ReactElement);
+    }) as React.ReactNode;
 
-    expect(wrapper).toMatchSnapshot();
+    render(<div data-testid="wrapper">{element}</div>);
+
+    expect(screen.getByTestId('wrapper')).toMatchSnapshot();
   });
 
   it('should handle broken markup', () => {
-    const element: React.ReactNode = convert('<div><span>los</span>', {
+    const element = convert('<div><span>los</span>', {
       selector: 'div',
-    });
-    const wrapper = mount(element as React.ReactElement);
+    }) as React.ReactNode;
 
-    expect(wrapper).toMatchSnapshot();
+    render(<div data-testid="wrapper">{element}</div>);
+
+    expect(screen.getByTestId('wrapper')).toMatchSnapshot();
   });
 
   it('should handle missing or invalid parameters', () => {

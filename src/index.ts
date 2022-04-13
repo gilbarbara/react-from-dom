@@ -124,7 +124,7 @@ export function convertFromNode(input: Node, options: Options = {}): React.React
 
   let node = input;
   let key = `${level}-${index}`;
-  const result: Array<Node | React.ReactNode> = [];
+  const result: React.ReactNode[] = [];
 
   if (randomKey && level === 0) {
     key = `${randomString()}-${key}`;
@@ -175,7 +175,7 @@ export function convertFromNode(input: Node, options: Options = {}): React.React
       const nodeText = node.nodeValue?.toString() || '';
 
       /* istanbul ignore else */
-      if (/^\s+$/.test(nodeText) && !/[\u202F\u00A0]/.test(nodeText)) {
+      if (/^\s+$/.test(nodeText) && !/[\u00A0\u202F]/.test(nodeText)) {
         return null;
       }
 
@@ -186,7 +186,7 @@ export function convertFromNode(input: Node, options: Options = {}): React.React
 
       const parentNodeName = node.parentNode.nodeName.toLowerCase();
 
-      if (noTextChildNodes.indexOf(parentNodeName) !== -1) {
+      if (noTextChildNodes.includes(parentNodeName)) {
         /* istanbul ignore else */
         if (/\S/.test(nodeText)) {
           // eslint-disable-next-line no-console
@@ -220,11 +220,11 @@ export function convertFromString(input: string, options: Options = {}): React.R
 
   try {
     const parser = new DOMParser();
-    const doc = parser.parseFromString(input, type as DOMParserSupportedType);
-    const node = doc.querySelector(selector);
+    const document = parser.parseFromString(input, type as DOMParserSupportedType);
+    const node = document.querySelector(selector);
 
     if (!(node instanceof Node)) {
-      throw new Error('Error parsing input');
+      throw new TypeError('Error parsing input');
     }
 
     if (nodeOnly) {
