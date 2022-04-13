@@ -1,88 +1,79 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`react-from-dom should convert a search form from a string 1`] = `
-<form
-  _lpchecked="1"
-  action="/search"
-  autoComplete="off"
-  className="search-bar"
-  id="search"
-  method="get"
+<div
+  data-testid="wrapper"
 >
-  <h1
-    key="1-3"
+  <form
+    _lpchecked="1"
+    action="/search"
+    autocomplete="off"
+    class="search-bar"
+    id="search"
+    method="get"
   >
-    Search
-  </h1>
-  
+    <h1>
+      Search
+    </h1>
+    
   Human
   
-  <label
-    htmlFor="pet-select"
-    key="1-5"
-  >
-    Choose a pet:
-  </label>
-  <select
-    id="pet-select"
-    key="1-7"
-  >
-    <option
-      key="2-1"
-      value=""
+    <label
+      for="pet-select"
     >
-      --Please choose an option--
-    </option>
-    <option
-      key="2-3"
-      value="dog"
+      Choose a pet:
+    </label>
+    <select
+      id="pet-select"
     >
-      Dog
-    </option>
-    <option
-      key="2-5"
-      selected={true}
-      value="cat"
-    >
-      Cat
-    </option>
-  </select>
-  <input
-    checked={true}
-    key="1-9"
-    name="visible"
-    type="checkbox"
-    value="on"
-  />
-  <div
-    className="ps-relative"
-    key="1-11"
-  >
+      <option
+        value=""
+      >
+        --Please choose an option--
+      </option>
+      <option
+        value="dog"
+      >
+        Dog
+      </option>
+      <option
+        value="cat"
+      >
+        Cat
+      </option>
+    </select>
     <input
-      aria-label="Search"
-      autoComplete="off"
-      className="s-input s-input__search js-search-field "
-      key="2-1"
-      maxLength="240"
-      name="q"
-      placeholder="Search…"
-      type="text"
+      checked=""
+      name="visible"
+      type="checkbox"
+      value="on"
     />
-    <svg
-      aria-hidden="true"
-      className="svg-icon s-input-icon s-input-icon__search iconSearch"
-      height="18"
-      key="2-3"
-      viewBox="0 0 18 18"
-      width="18"
+    <div
+      class="ps-relative"
     >
-      <path
-        d="M18 16.5l-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5zM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0z"
-        key="3-0"
+      <input
+        aria-label="Search"
+        autocomplete="off"
+        class="s-input s-input__search js-search-field "
+        maxlength="240"
+        name="q"
+        placeholder="Search…"
+        type="text"
       />
-    </svg>
-  </div>
-</form>
+      <svg
+        aria-hidden="true"
+        class="svg-icon s-input-icon s-input-icon__search iconSearch"
+        height="18"
+        viewBox="0 0 18 18"
+        width="18"
+      >
+        <path
+          d="M18 16.5l-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5zM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0z"
+        />
+      </svg>
+    </div>
+  </form>
+</div>
 `;
 
 exports[`react-from-dom should convert an SVG from a string 1`] = `
@@ -168,108 +159,91 @@ exports[`react-from-dom should convert an SVG from a string 1`] = `
 `;
 
 exports[`react-from-dom should convert an SVG from a string 2`] = `
-<svg
-  height="6px"
-  preserveAspectRatio="xMidYMid"
-  version="1.1"
-  viewBox="0 0 20 6"
-  width="20px"
-  xmlns="http://www.w3.org/2000/svg"
-  xmlnsXlink="http://www.w3.org/1999/xlink"
+<div
+  data-testid="wrapper"
 >
-  <defs
-    key="1-1"
+  <svg
+    height="6px"
+    preserveAspectRatio="xMidYMid"
+    version="1.1"
+    viewBox="0 0 20 6"
+    width="20px"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
   >
-    <path
-      d="M3,6 C1.34314575,6 0,4.65685425 0,3 C0,1.34314575 1.34314575,0 3,0 C4.65685425,0 6,1.34314575 6,3 C6,4.65685425 4.65685425,6 3,6 Z M10,6 C8.34314575,6 7,4.65685425 7,3 C7,1.34314575 8.34314575,0 10,0 C11.6568542,0 13,1.34314575 13,3 C13,4.65685425 11.6568542,6 10,6 Z M17,6 C15.3431458,6 14,4.65685425 14,3 C14,1.34314575 15.3431458,0 17,0 C18.6568542,0 20,1.34314575 20,3 C20,4.65685425 18.6568542,6 17,6 Z"
-      id="path-1"
-      key="2-1"
-    />
-    <radialGradient
-      cx="50%"
-      cy="50%"
-      fx="50%"
-      fy="50%"
-      gradientTransform="translate(0.500000,0.500000),scale(0.300000,1.000000),rotate(180.000000),translate(-0.500000,-0.500000)"
-      id="radialGradient-3"
-      key="2-3"
-      r="166.666667%"
-    >
-      <stop
-        key="3-1"
-        offset="0%"
-        stopColor="#F8E71C"
+    <defs>
+      <path
+        d="M3,6 C1.34314575,6 0,4.65685425 0,3 C0,1.34314575 1.34314575,0 3,0 C4.65685425,0 6,1.34314575 6,3 C6,4.65685425 4.65685425,6 3,6 Z M10,6 C8.34314575,6 7,4.65685425 7,3 C7,1.34314575 8.34314575,0 10,0 C11.6568542,0 13,1.34314575 13,3 C13,4.65685425 11.6568542,6 10,6 Z M17,6 C15.3431458,6 14,4.65685425 14,3 C14,1.34314575 15.3431458,0 17,0 C18.6568542,0 20,1.34314575 20,3 C20,4.65685425 18.6568542,6 17,6 Z"
+        id="path-1"
       />
-      <stop
-        key="3-3"
-        offset="100%"
-        stopColor="#FF0044"
+      <radialgradient
+        cx="50%"
+        cy="50%"
+        fx="50%"
+        fy="50%"
+        gradientTransform="translate(0.500000,0.500000),scale(0.300000,1.000000),rotate(180.000000),translate(-0.500000,-0.500000)"
+        id="radialGradient-3"
+        r="166.666667%"
+      >
+        <stop
+          offset="0%"
+          stop-color="#F8E71C"
+        />
+        <stop
+          offset="100%"
+          stop-color="#FF0044"
+        />
+      </radialgradient>
+    </defs>
+    <g>
+      <mask
+        id="mask-2"
+        style="fill: #fff;"
+      >
+        <use
+          xlink:href="#path-1"
+        />
+      </mask>
+      <polygon
+        fill="url(#radialGradient-3)"
+        fill-rule="nonzero"
+        mask="url(#mask-2)"
+        points="0 0 20 0 20 6 0 6"
+        style="z-index: 100;"
       />
-    </radialGradient>
-  </defs>
-  <g
-    key="1-3"
-  >
-    <mask
-      id="mask-2"
-      key="2-1"
-      style={
-        Object {
-          "fill": "#fff",
-        }
-      }
-    >
-      <use
-        key="3-1"
-        xlinkHref="#path-1"
-      />
-    </mask>
-    <polygon
-      fill="url(#radialGradient-3)"
-      fillRule="nonzero"
-      key="2-3"
-      mask="url(#mask-2)"
-      points="0 0 20 0 20 6 0 6"
-      style={
-        Object {
-          "zIndex": 100,
-        }
-      }
-    />
-  </g>
-</svg>
+    </g>
+  </svg>
+</div>
 `;
 
 exports[`react-from-dom should convert an SVG with style and script from a string 1`] = `
-<svg
-  height="400px"
-  preserveAspectRatio="xMidYMid"
-  version="1.1"
-  viewBox="0 0 600 400"
-  width="600px"
-  xmlns="http://www.w3.org/2000/svg"
+<div
+  data-testid="wrapper"
 >
-  <style
-    key="1-1"
+  <svg
+    height="400px"
+    preserveAspectRatio="xMidYMid"
+    version="1.1"
+    viewBox="0 0 600 400"
+    width="600px"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    
+    <style>
+      
       @import url(main.css);
     
-  </style>
-  <style
-    key="1-3"
-  >
-    
+    </style>
+    <style>
+      
       circle:last-child {
         fill: green;
       }
     
-  </style>
-  <script
-    key="1-5"
-    type="text/javascript"
-  >
-    
+    </style>
+    <script
+      type="text/javascript"
+    >
+      
       
         function change(evt) {
           var target = evt.target;
@@ -285,161 +259,142 @@ exports[`react-from-dom should convert an SVG with style and script from a strin
         }
       
     
-  </script>
-  <g
-    key="1-7"
-  >
-    <circle
-      cx="200"
-      cy="200"
-      fill="#DDDDDD"
-      key="2-1"
-      onClick="change(evt)"
-      r="200"
-    />
-    <circle
-      cx="400"
-      cy="200"
-      fill="#000000"
-      fillOpacity="0.8"
-      key="2-3"
-      r="200"
-    />
-  </g>
-</svg>
+    </script>
+    <g>
+      <circle
+        cx="200"
+        cy="200"
+        fill="#DDDDDD"
+        r="200"
+      />
+      <circle
+        cx="400"
+        cy="200"
+        fill="#000000"
+        fill-opacity="0.8"
+        r="200"
+      />
+    </g>
+  </svg>
+</div>
 `;
 
 exports[`react-from-dom should convert an audio from Node 1`] = `
-<audio
-  controls={true}
-  src="https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3"
+<div
+  data-testid="wrapper"
 >
-  Your browser does not support the audio element.
-</audio>
+  <audio
+    controls=""
+    src="https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3"
+  >
+    Your browser does not support the audio element.
+  </audio>
+</div>
 `;
 
 exports[`react-from-dom should convert an iframe from a string 1`] = `
-<iframe
-  allow="autoplay; encrypted-media"
-  allowFullScreen={true}
-  frameBorder="0"
-  height="270"
-  src="https://www.youtube.com/embed/kemF0xdmsaY?feature=oembed"
-  width="480"
-/>
+<div
+  data-testid="wrapper"
+>
+  <iframe
+    allow="autoplay; encrypted-media"
+    allowfullscreen=""
+    frameborder="0"
+    height="270"
+    src="https://www.youtube.com/embed/kemF0xdmsaY?feature=oembed"
+    width="480"
+  />
+</div>
 `;
 
 exports[`react-from-dom should handle UTF8 text 1`] = `
-<svg>
-  <tspan
-    baselineShift="0%"
-    fill="#E4E9F2"
-    fontFamily="斯柯达体"
-    fontSize="20"
-    key="1-1"
-    xmlSpace="preserve"
-  >
-    眼观：仪表盘、车辆
-  </tspan>
-</svg>
+<div
+  data-testid="wrapper"
+>
+  <svg>
+    <tspan
+      baseline-shift="0%"
+      fill="#E4E9F2"
+      font-family="斯柯达体"
+      font-size="20"
+      xml:space="preserve"
+    >
+      眼观：仪表盘、车辆
+    </tspan>
+  </svg>
+</div>
 `;
 
 exports[`react-from-dom should handle actions 1`] = `
 <div
-  className="panel panel--fixed"
-  key="ABCDE-0-0"
+  data-testid="wrapper"
 >
   <div
-    className="panel-header"
-    key="1-1"
+    class="panel panel--fixed"
   >
-    <h2
-      key="2-1"
+    <div
+      class="panel-header"
     >
-      Title
-    </h2>
-  </div>
-  <div
-    className="panel-content"
-    key="1-3"
-  >
-    <ol
-      key="2-1"
+      <h2>
+        Title
+      </h2>
+    </div>
+    <div
+      class="panel-content"
     >
-      <li
-        key="3-1"
-      >
-        line 1
-      </li>
-      <li
-        key="3-3"
-      >
-        line 2
-      </li>
-    </ol>
-    <p
-      key="2-3"
-    >
-      
+      <ol>
+        <li>
+          line 1
+        </li>
+        <li>
+          line 2
+        </li>
+      </ol>
+      <p>
+        
       This Element has a 
-      <code
-        key="3-1"
-      >
-        style
-      </code>
-       attribute.
-      <br
-        key="3-3"
-      />
-      
+        <code>
+          style
+        </code>
+         attribute.
+        <br />
+        
       It also shows how to use the 
-      <code
-        key="3-5"
-      >
-        parser
-      </code>
-      -argument
+        <code>
+          parser
+        </code>
+        -argument
     
-    </p>
-    <p
-      key="2-5"
-    >
-       
-    </p>
-    <p
-      key="2-7"
-    >
-      
+      </p>
+      <p>
+         
+      </p>
+      <p>
+        
       This is the second paragraph
     
-    </p>
-    <img
-      key="2-9"
-    />
-    EMPTY
+      </p>
+      <img />
+      EMPTY
     
-    <ReactMarkdown
-      key="2-11"
-      source="This is a test"
-    />
-    <code
-      key="2-13"
-    >
-      throw new Error('Fail');
-    </code>
-    <dl
-      key="2-15"
-    />
+      <div />
+      <code>
+        throw new Error('Fail');
+      </code>
+      <dl />
+    </div>
   </div>
 </div>
 `;
 
 exports[`react-from-dom should handle broken markup 1`] = `
-<div>
-  <span
-    key="1-0"
-  >
-    los
-  </span>
+<div
+  data-testid="wrapper"
+>
+  <div>
+    <span>
+      los
+    </span>
+  </div>
 </div>
 `;

@@ -19,7 +19,7 @@ export function randomString(length = 6): string {
   const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   let result = '';
 
-  for (let i = length; i > 0; --i) {
+  for (let index = length; index > 0; --index) {
     result += characters[Math.round(Math.random() * (characters.length - 1))];
   }
 
