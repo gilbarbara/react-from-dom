@@ -9,18 +9,22 @@ module.exports = {
       statements: 90,
     },
   },
-  globals: {
-    'ts-jest': {
-      tsconfig: 'test/tsconfig.json',
-    },
-  },
-  moduleDirectories: ['node_modules', 'src', './'],
-  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json'],
-  preset: 'ts-jest',
+  moduleDirectories: ['node_modules', 'src'],
   setupFilesAfterEnv: ['<rootDir>/test/__setup__/setupFilesAfterEnv.ts'],
   testEnvironment: 'jsdom',
   testMatch: null,
   testRegex: '/test/.*?\\.(test|spec)\\.tsx?$',
+  transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        tsconfig: 'test/tsconfig.json',
+        diagnostics: {
+          ignoreCodes: ['TS151001'],
+        },
+      },
+    ],
+  },
   verbose: false,
   watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
 };
