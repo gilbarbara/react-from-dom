@@ -78,6 +78,21 @@ describe('react-from-dom', () => {
     expect(screen.getByTestId('wrapper')).toMatchSnapshot();
   });
 
+  it('should convert a fragment', () => {
+    const fragment = document.createDocumentFragment();
+    const div = document.createElement('div');
+
+    div.appendChild(document.createTextNode("I'm inside a `div`."));
+    fragment.appendChild(document.createTextNode('Hello, world!'));
+    fragment.appendChild(div);
+
+    const element = convert(fragment) as React.ReactNode;
+
+    render(<div data-testid="wrapper">{element}</div>);
+
+    expect(screen.getByTestId('wrapper')).toMatchSnapshot();
+  });
+
   it('should handle actions', () => {
     const element = convert(panel, {
       actions: [

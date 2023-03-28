@@ -12,6 +12,8 @@ export interface Options {
   type?: string;
 }
 
+export type Output = React.ReactNode | Node;
+
 interface Attributes {
   [index: string]: any;
 
@@ -198,6 +200,11 @@ export function convertFromNode(input: Node, options: Options = {}): React.React
       // html-comment
       return null;
     }
+    case 11: {
+      // fragment
+
+      return parseChildren(node.childNodes, level, options);
+    }
     /* c8 ignore next 3 */
     default: {
       return null;
@@ -205,7 +212,7 @@ export function convertFromNode(input: Node, options: Options = {}): React.React
   }
 }
 
-export function convertFromString(input: string, options: Options = {}): React.ReactNode | Node {
+export function convertFromString(input: string, options: Options = {}): Output {
   if (!input || typeof input !== 'string') {
     return null;
   }
@@ -236,10 +243,7 @@ export function convertFromString(input: string, options: Options = {}): React.R
   return null;
 }
 
-export default function convert(
-  input: Node | string,
-  options: Options = {},
-): React.ReactNode | Node {
+export default function convert(input: Node | string, options: Options = {}): Output {
   if (typeof input === 'string') {
     return convertFromString(input, options);
   }
