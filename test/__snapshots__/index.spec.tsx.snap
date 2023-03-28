@@ -1,5 +1,16 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`react-from-dom > should convert a fragment 1`] = `
+<div
+  data-testid="wrapper"
+>
+  Hello, world!
+  <div>
+    I'm inside a \`div\`.
+  </div>
+</div>
+`;
+
 exports[`react-from-dom > should convert a search form from a string 1`] = `
 <div
   data-testid="wrapper"
