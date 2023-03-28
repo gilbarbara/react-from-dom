@@ -1,4 +1,1 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-repo-tools check-remote && npm run validate
+./node_modules/.bin/repo-tools check-remote && npm run validate
