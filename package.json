@@ -20,23 +20,28 @@
     "url": "https://github.com/gilbarbara/react-from-dom/issues"
   },
   "homepage": "https://github.com/gilbarbara/react-from-dom#readme",
-  "main": "lib/index.js",
-  "module": "esm/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
+  },
   "files": [
-    "esm",
-    "lib",
+    "dist",
     "src"
   ],
-  "types": "./lib",
+  "types": "dist/index.d.ts",
   "sideEffects": false,
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.15.0",
     "@gilbarbara/eslint-config": "^0.7.4",
     "@gilbarbara/prettier-config": "^1.0.0",
     "@gilbarbara/tsconfig": "^0.2.3",
     "@size-limit/preset-small-lib": "^11.0.2",
+    "@swc/core": "^1.4.2",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "@types/jest": "^29.5.12",
@@ -56,25 +61,36 @@
     "size-limit": "^11.0.2",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
+    "tsup": "^8.0.2",
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "build": "npm run clean && npm run build:cjs && npm run build:esm",
-    "build:cjs": "tsc",
-    "build:esm": "tsc -m es6 --outDir esm",
-    "watch:cjs": "npm run build:cjs -- -w",
-    "watch:esm": "npm run build:esm -- -w",
-    "clean": "del lib/* && del esm/*",
-    "lint": "eslint --ext .ts,.tsx src test",
+    "build": "npm run clean && tsup",
+    "watch": "tsup --watch",
+    "clean": "del dist/*",
+    "lint": "eslint --fix src test",
     "test": "is-ci \"test:coverage\" \"test:watch\"",
     "test:coverage": "jest --coverage --bail",
     "test:watch": "jest --watchAll --verbose",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc",
+    "typevalidation": "attw -P",
     "format": "prettier \"**/*.{js,jsx,json,yml,yaml,css,less,scss,ts,tsx,md,graphql,mdx}\" --write",
-    "validate": "npm run lint && npm run typecheck && npm run test:coverage && npm run build && npm run size",
+    "validate": "npm run lint && npm run typecheck && npm run test:coverage && npm run build && npm run size && npm run typevalidation",
     "size": "size-limit",
     "prepublishOnly": "npm run validate",
     "prepare": "husky"
+  },
+  "tsup": {
+    "dts": true,
+    "entry": [
+      "src/index.ts"
+    ],
+    "format": [
+      "cjs",
+      "esm"
+    ],
+    "sourcemap": true,
+    "splitting": false
   },
   "eslintConfig": {
     "extends": [
@@ -84,14 +100,14 @@
   "prettier": "@gilbarbara/prettier-config",
   "size-limit": [
     {
-      "name": "lib",
-      "path": "./lib/index.js",
-      "limit": "6 kB"
+      "name": "commonjs",
+      "path": "./dist/index.js",
+      "limit": "5 kB"
     },
     {
       "name": "esm",
-      "path": "./esm/index.js",
-      "limit": "6 kB"
+      "path": "./dist/index.mjs",
+      "limit": "5 kB"
     }
   ]
 }
