@@ -328,6 +328,20 @@ exports[`react-from-dom > should convert an iframe from a string 1`] = `
 </div>
 `;
 
+exports[`react-from-dom > should convert markup with spaces 1`] = `
+<div
+  data-testid="wrapper"
+>
+  <a>
+    link 1
+  </a>
+   
+  <a>
+    link 2
+  </a>
+</div>
+`;
+
 exports[`react-from-dom > should convert multiple nodes > nodeList 1`] = `
 NodeList [
   1,

@@ -8,6 +8,10 @@ export interface Options {
    */
   actions?: Action[];
   /**
+   * Skip removing white spaces in the output.
+   */
+  allowWhiteSpaces?: boolean;
+  /**
    * Parse all nodes instead of just a single parent node.
    * This will return a ReactNode array (or a NodeList if `nodeOnly` is true).
    */
@@ -85,7 +89,7 @@ function getReactNode(node: Node, options: GetReactNodeOptions): React.ReactNode
       // textnode
       const nodeText = node.nodeValue?.toString() ?? '';
 
-      if (/^\s+$/.test(nodeText) && !/[\u00A0\u202F]/.test(nodeText)) {
+      if (!rest.allowWhiteSpaces && /^\s+$/.test(nodeText) && !/[\u00A0\u202F]/.test(nodeText)) {
         return null;
       }
 

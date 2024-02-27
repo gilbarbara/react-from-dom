@@ -1,7 +1,16 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { audio, form, iframe, panel, svg, svgWithStyleAndScript, utf8 } from './__fixtures__/data';
+import {
+  audio,
+  form,
+  iframe,
+  links,
+  panel,
+  svg,
+  svgWithStyleAndScript,
+  utf8,
+} from './__fixtures__/data';
 
 import convert, { convertFromNode, convertFromString } from '../src/index';
 
@@ -87,6 +96,17 @@ describe('react-from-dom', () => {
     fragment.appendChild(div);
 
     const element = convert(fragment) as React.ReactNode;
+
+    render(<div data-testid="wrapper">{element}</div>);
+
+    expect(screen.getByTestId('wrapper')).toMatchSnapshot();
+  });
+
+  it('should convert markup with spaces', () => {
+    const element = convert(links, {
+      allowWhiteSpaces: true,
+      includeAllNodes: true,
+    }) as React.ReactNode;
 
     render(<div data-testid="wrapper">{element}</div>);
 

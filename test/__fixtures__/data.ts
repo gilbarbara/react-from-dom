@@ -30,6 +30,8 @@ export const form = `
 export const iframe =
   '<iframe width="480" height="270" src="https://www.youtube.com/embed/kemF0xdmsaY?feature=oembed" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
 
+export const links = '<a>link 1</a> <a>link 2</a>';
+
 export const panel = `
 <div class="panel">
   <div class="panel-header">
