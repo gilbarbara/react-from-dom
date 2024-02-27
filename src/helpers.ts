@@ -1,11 +1,18 @@
 export const styleToObject = (input: string): Record<string, any> => {
-  const attributes = input.split(/ ?; ?/);
+  /* c8 ignore next 3 */
+  if (typeof input !== 'string') {
+    return {};
+  }
 
-  return attributes.reduce((acc: Record<string, any>, d: string) => {
+  const attributes = input.replace(/\n/, '').split(/ ?; ?/);
+
+  return attributes.reduce<Record<string, string | number>>((acc, d: string) => {
     const [key, value] = d.split(/ ?: ?/);
 
     if (key && value) {
-      acc[key.replace(/-(\w)/g, (_$0, $1) => $1.toUpperCase())] = Number.isNaN(Number(value))
+      const nextKey = key.replace(/-(\w)/g, (_$0, $1) => $1.toUpperCase());
+
+      acc[key.startsWith('-') ? key : nextKey] = Number.isNaN(Number(value))
         ? value
         : Number(value);
     }
@@ -14,7 +21,6 @@ export const styleToObject = (input: string): Record<string, any> => {
   }, {});
 };
 
-/* c8 ignore start */
 export function randomString(length = 6): string {
   const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   let result = '';
@@ -25,7 +31,6 @@ export function randomString(length = 6): string {
 
   return result;
 }
-/* c8 ignore stop */
 
 export const noTextChildNodes = [
   'br',
