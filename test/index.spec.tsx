@@ -93,6 +93,25 @@ describe('react-from-dom', () => {
     expect(screen.getByTestId('wrapper')).toMatchSnapshot();
   });
 
+  it('should convert a text node', () => {
+    const element = convert('test') as React.ReactNode;
+
+    render(<div data-testid="wrapper">{element}</div>);
+
+    expect(screen.getByTestId('wrapper')).toMatchSnapshot();
+  });
+
+  it('should convert multiple nodes', () => {
+    const reactNode = convert('1<span>2</span>3', { includeAllNodes: true }) as React.ReactNode;
+
+    render(<div data-testid="wrapper">{reactNode}</div>);
+    expect(screen.getByTestId('wrapper')).toMatchSnapshot('reactNode');
+
+    const nodeList = convert('1<span>2</span>3', { includeAllNodes: true, nodeOnly: true });
+
+    expect(nodeList).toMatchSnapshot('nodeList');
+  });
+
   it('should handle actions', () => {
     const element = convert(panel, {
       actions: [
@@ -174,7 +193,8 @@ describe('react-from-dom', () => {
     // @ts-ignore
     expect(convertFromString([])).toBeNull();
 
-    // @ts-ignore
-    expect(convertFromString('This is a test')).toBeNull();
+    expect(convertFromString('This is a test')).toBe('This is a test');
+
+    expect(convert('', { includeAllNodes: true })).toBeNull();
   });
 });
