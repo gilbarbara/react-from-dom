@@ -87,6 +87,14 @@ exports[`react-from-dom > should convert a search form from a string 1`] = `
 </div>
 `;
 
+exports[`react-from-dom > should convert a text node 1`] = `
+<div
+  data-testid="wrapper"
+>
+  test
+</div>
+`;
+
 exports[`react-from-dom > should convert an SVG from a string 1`] = `
 <svg
   height="6px"
@@ -315,6 +323,28 @@ exports[`react-from-dom > should convert an iframe from a string 1`] = `
     src="https://www.youtube.com/embed/kemF0xdmsaY?feature=oembed"
     width="480"
   />
+</div>
+`;
+
+exports[`react-from-dom > should convert multiple nodes > nodeList 1`] = `
+NodeList [
+  1,
+  <span>
+    2
+  </span>,
+  3,
+]
+`;
+
+exports[`react-from-dom > should convert multiple nodes > reactNode 1`] = `
+<div
+  data-testid="wrapper"
+>
+  1
+  <span>
+    2
+  </span>
+  3
 </div>
 `;
 

@@ -3,21 +3,57 @@ import * as React from 'react';
 import { noTextChildNodes, possibleStandardNames, randomString, styleToObject } from './helpers';
 
 export interface Options {
+  /**
+   * An array of actions to modify the nodes before they are converted to ReactNodes.
+   */
   actions?: Action[];
+  /**
+   * Parse all nodes instead of just a single parent node.
+   * This will return a ReactNode array (or a NodeList if `nodeOnly` is true).
+   */
+  includeAllNodes?: boolean;
+  /**
+   * The index to start with.
+   * @default 0
+   */
   index?: number;
+  /**
+   * The level to start with.
+   * @default 0
+   */
   level?: number;
+  /**
+   * Only return the node (or NodeList) without converting it to a ReactNode.
+   */
   nodeOnly?: boolean;
+  /**
+   * Add a random key to the root element.
+   * @default false
+   */
   randomKey?: boolean;
+  /**
+   * The selector to use for in the `document.querySelector` method.
+   * @default 'body > *'
+   */
   selector?: string;
-  type?: string;
+  /**
+   * The type of the input string.
+   * @default 'text/html'
+   */
+  type?: DOMParserSupportedType;
 }
 
-export type Output = React.ReactNode | Node;
+export type Output = React.ReactNode | Node | NodeList;
 
 interface Attributes {
   [index: string]: any;
 
   key: string;
+}
+
+interface GetReactNodeOptions extends Options {
+  key: string;
+  level: number;
 }
 
 export interface Action {
@@ -31,6 +67,62 @@ export interface Action {
   // Use this to update or replace the node
   // e.g. for removing or adding attributes, changing the node type
   pre?: (node: Node, key: string, level: number) => Node;
+}
+
+function getReactNode(node: Node, options: GetReactNodeOptions): React.ReactNode {
+  const { key, level, ...rest } = options;
+
+  switch (node.nodeType) {
+    case 1: {
+      // regular dom-node
+      return React.createElement(
+        parseName(node.nodeName),
+        parseAttributes(node, key),
+        parseChildren(node.childNodes, level, rest),
+      );
+    }
+    case 3: {
+      // textnode
+      const nodeText = node.nodeValue?.toString() ?? '';
+
+      if (/^\s+$/.test(nodeText) && !/[\u00A0\u202F]/.test(nodeText)) {
+        return null;
+      }
+
+      /* c8 ignore next 3 */
+      if (!node.parentNode) {
+        return nodeText;
+      }
+
+      const parentNodeName = node.parentNode.nodeName.toLowerCase();
+
+      if (noTextChildNodes.includes(parentNodeName)) {
+        if (/\S/.test(nodeText)) {
+          // eslint-disable-next-line no-console
+          console.warn(
+            `A textNode is not allowed inside '${parentNodeName}'. Your text "${nodeText}" will be ignored`,
+          );
+        }
+
+        return null;
+      }
+
+      return nodeText;
+    }
+    case 8: {
+      // html-comment
+      return null;
+    }
+    case 11: {
+      // fragment
+
+      return parseChildren(node.childNodes, level, options);
+    }
+    /* c8 ignore next 3 */
+    default: {
+      return null;
+    }
+  }
 }
 
 function parseAttributes(node: Node, reactKey: string): Attributes {
@@ -159,57 +251,7 @@ export function convertFromNode(input: Node, options: Options = {}): React.React
     return result;
   }
 
-  switch (node.nodeType) {
-    case 1: {
-      // regular dom-node
-      return React.createElement(
-        parseName(node.nodeName),
-        parseAttributes(node, key),
-        parseChildren(node.childNodes, level, options),
-      );
-    }
-    case 3: {
-      // textnode
-      const nodeText = node.nodeValue?.toString() ?? '';
-
-      if (/^\s+$/.test(nodeText) && !/[\u00A0\u202F]/.test(nodeText)) {
-        return null;
-      }
-
-      /* c8 ignore next 3 */
-      if (!node.parentNode) {
-        return nodeText;
-      }
-
-      const parentNodeName = node.parentNode.nodeName.toLowerCase();
-
-      if (noTextChildNodes.includes(parentNodeName)) {
-        if (/\S/.test(nodeText)) {
-          // eslint-disable-next-line no-console
-          console.warn(
-            `A textNode is not allowed inside '${parentNodeName}'. Your text "${nodeText}" will be ignored`,
-          );
-        }
-
-        return null;
-      }
-
-      return nodeText;
-    }
-    case 8: {
-      // html-comment
-      return null;
-    }
-    case 11: {
-      // fragment
-
-      return parseChildren(node.childNodes, level, options);
-    }
-    /* c8 ignore next 3 */
-    default: {
-      return null;
-    }
-  }
+  return getReactNode(node, { key, level, ...options });
 }
 
 export function convertFromString(input: string, options: Options = {}): Output {
@@ -217,13 +259,30 @@ export function convertFromString(input: string, options: Options = {}): Output 
     return null;
   }
 
-  const { nodeOnly = false, selector = 'body > *', type = 'text/html' } = options;
+  const {
+    includeAllNodes = false,
+    nodeOnly = false,
+    selector = 'body > *',
+    type = 'text/html',
+  } = options;
 
   try {
     const parser = new DOMParser();
-    const document = parser.parseFromString(input, type as DOMParserSupportedType);
-    const node = document.querySelector(selector);
+    const document = parser.parseFromString(input, type);
 
+    if (includeAllNodes) {
+      const { childNodes } = document.body;
+
+      if (nodeOnly) {
+        return childNodes;
+      }
+
+      return [...childNodes].map(node => convertFromNode(node, options));
+    }
+
+    const node = document.querySelector(selector) || document.body.childNodes[0];
+
+    /* c8 ignore next 3 */
     if (!(node instanceof Node)) {
       throw new TypeError('Error parsing input');
     }
@@ -233,6 +292,7 @@ export function convertFromString(input: string, options: Options = {}): Output 
     }
 
     return convertFromNode(node, options);
+    /* c8 ignore start */
   } catch (error) {
     if (process.env.NODE_ENV !== 'production') {
       // eslint-disable-next-line no-console
@@ -241,6 +301,7 @@ export function convertFromString(input: string, options: Options = {}): Output 
   }
 
   return null;
+  /* c8 ignore stop */
 }
 
 export default function convert(input: Node | string, options: Options = {}): Output {
