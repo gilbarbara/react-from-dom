@@ -99,6 +99,7 @@ exports[`react-from-dom > should convert an SVG from a string 1`] = `
 <svg
   height="6px"
   preserveAspectRatio="xMidYMid"
+  style="--my-var: #f04"
   version="1.1"
   viewBox="0 0 20 6"
   width="20px"
@@ -184,6 +185,7 @@ exports[`react-from-dom > should convert an SVG from a string 2`] = `
   <svg
     height="6px"
     preserveAspectRatio="xMidYMid"
+    style="--my-var: #f04;"
     version="1.1"
     viewBox="0 0 20 6"
     width="20px"
