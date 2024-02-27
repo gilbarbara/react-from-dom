@@ -5,8 +5,8 @@ import { audio, form, iframe, panel, svg, svgWithStyleAndScript, utf8 } from './
 
 import convert, { convertFromNode, convertFromString } from '../src/index';
 
-jest.mock('../src/helpers', () => {
-  const helpers = jest.requireActual('../src/helpers');
+vi.mock('../src/helpers', async () => {
+  const helpers = await vi.importActual('../src/helpers');
 
   return {
     ...helpers,
@@ -20,8 +20,8 @@ function ReactMarkdown({ children }: React.PropsWithChildren<any>) {
 
 describe('react-from-dom', () => {
   beforeAll(() => {
-    jest.spyOn(console, 'error').mockImplementation();
-    jest.spyOn(console, 'warn').mockImplementation();
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
   });
 
   it('should convert an SVG from a string', () => {

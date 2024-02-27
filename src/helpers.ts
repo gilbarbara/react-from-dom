@@ -14,7 +14,7 @@ export const styleToObject = (input: string): Record<string, any> => {
   }, {});
 };
 
-/* istanbul ignore next */
+/* c8 ignore start */
 export function randomString(length = 6): string {
   const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   let result = '';
@@ -25,6 +25,7 @@ export function randomString(length = 6): string {
 
   return result;
 }
+/* c8 ignore stop */
 
 export const noTextChildNodes = [
   'br',
