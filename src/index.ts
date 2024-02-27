@@ -36,7 +36,6 @@ function parseAttributes(node: Node, reactKey: string): Attributes {
     key: reactKey,
   };
 
-  /* istanbul ignore else */
   if (node instanceof Element) {
     const nodeClassNames = node.getAttribute('class');
 
@@ -129,7 +128,6 @@ export function convertFromNode(input: Node, options: Options = {}): React.React
     key = `${randomString()}-${key}`;
   }
 
-  /* istanbul ignore else */
   if (Array.isArray(actions)) {
     actions.forEach((action: Action) => {
       if (action.condition(node, key, level)) {
@@ -139,7 +137,6 @@ export function convertFromNode(input: Node, options: Options = {}): React.React
           if (!(node instanceof Node)) {
             node = input;
 
-            /* istanbul ignore else */
             if (process.env.NODE_ENV !== 'production') {
               // eslint-disable-next-line no-console
               console.warn(
@@ -173,12 +170,11 @@ export function convertFromNode(input: Node, options: Options = {}): React.React
       // textnode
       const nodeText = node.nodeValue?.toString() ?? '';
 
-      /* istanbul ignore else */
       if (/^\s+$/.test(nodeText) && !/[\u00A0\u202F]/.test(nodeText)) {
         return null;
       }
 
-      /* istanbul ignore next */
+      /* c8 ignore next 3 */
       if (!node.parentNode) {
         return nodeText;
       }
@@ -186,7 +182,6 @@ export function convertFromNode(input: Node, options: Options = {}): React.React
       const parentNodeName = node.parentNode.nodeName.toLowerCase();
 
       if (noTextChildNodes.includes(parentNodeName)) {
-        /* istanbul ignore else */
         if (/\S/.test(nodeText)) {
           // eslint-disable-next-line no-console
           console.warn(
@@ -203,7 +198,7 @@ export function convertFromNode(input: Node, options: Options = {}): React.React
       // html-comment
       return null;
     }
-    /* istanbul ignore next */
+    /* c8 ignore next 3 */
     default: {
       return null;
     }
@@ -232,7 +227,6 @@ export function convertFromString(input: string, options: Options = {}): React.R
 
     return convertFromNode(node, options);
   } catch (error) {
-    /* istanbul ignore else */
     if (process.env.NODE_ENV !== 'production') {
       // eslint-disable-next-line no-console
       console.error(error);

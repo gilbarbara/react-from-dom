@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`react-from-dom should convert a search form from a string 1`] = `
+exports[`react-from-dom > should convert a search form from a string 1`] = `
 <div
   data-testid="wrapper"
 >
@@ -76,7 +76,7 @@ exports[`react-from-dom should convert a search form from a string 1`] = `
 </div>
 `;
 
-exports[`react-from-dom should convert an SVG from a string 1`] = `
+exports[`react-from-dom > should convert an SVG from a string 1`] = `
 <svg
   height="6px"
   preserveAspectRatio="xMidYMid"
@@ -158,7 +158,7 @@ exports[`react-from-dom should convert an SVG from a string 1`] = `
 </svg>
 `;
 
-exports[`react-from-dom should convert an SVG from a string 2`] = `
+exports[`react-from-dom > should convert an SVG from a string 2`] = `
 <div
   data-testid="wrapper"
 >
@@ -216,7 +216,7 @@ exports[`react-from-dom should convert an SVG from a string 2`] = `
 </div>
 `;
 
-exports[`react-from-dom should convert an SVG with style and script from a string 1`] = `
+exports[`react-from-dom > should convert an SVG with style and script from a string 1`] = `
 <div
   data-testid="wrapper"
 >
@@ -279,7 +279,7 @@ exports[`react-from-dom should convert an SVG with style and script from a strin
 </div>
 `;
 
-exports[`react-from-dom should convert an audio from Node 1`] = `
+exports[`react-from-dom > should convert an audio from Node 1`] = `
 <div
   data-testid="wrapper"
 >
@@ -292,7 +292,7 @@ exports[`react-from-dom should convert an audio from Node 1`] = `
 </div>
 `;
 
-exports[`react-from-dom should convert an iframe from a string 1`] = `
+exports[`react-from-dom > should convert an iframe from a string 1`] = `
 <div
   data-testid="wrapper"
 >
@@ -307,7 +307,7 @@ exports[`react-from-dom should convert an iframe from a string 1`] = `
 </div>
 `;
 
-exports[`react-from-dom should handle UTF8 text 1`] = `
+exports[`react-from-dom > should handle UTF8 text 1`] = `
 <div
   data-testid="wrapper"
 >
@@ -325,7 +325,7 @@ exports[`react-from-dom should handle UTF8 text 1`] = `
 </div>
 `;
 
-exports[`react-from-dom should handle actions 1`] = `
+exports[`react-from-dom > should handle actions 1`] = `
 <div
   data-testid="wrapper"
 >
@@ -387,7 +387,7 @@ exports[`react-from-dom should handle actions 1`] = `
 </div>
 `;
 
-exports[`react-from-dom should handle broken markup 1`] = `
+exports[`react-from-dom > should handle broken markup 1`] = `
 <div
   data-testid="wrapper"
 >
