@@ -61,14 +61,8 @@ export const panel = `
 </div>
 `;
 
-export const utf8 = `
-<svg>
-  <tspan baseline-shift="0%" font-family="斯柯达体" font-size="20" fill="#E4E9F2" xml:space="preserve">眼观：仪表盘、车辆</tspan>
-</svg>
-`;
-
 export const svg = `
-<svg width="20px" height="6px" viewBox="0 0 20 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" style="--my-var: #f04">
+<svg width="20px" height="6px" viewBox="0 0 20 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
     <defs>
         <path d="M3,6 C1.34314575,6 0,4.65685425 0,3 C0,1.34314575 1.34314575,0 3,0 C4.65685425,0 6,1.34314575 6,3 C6,4.65685425 4.65685425,6 3,6 Z M10,6 C8.34314575,6 7,4.65685425 7,3 C7,1.34314575 8.34314575,0 10,0 C11.6568542,0 13,1.34314575 13,3 C13,4.65685425 11.6568542,6 10,6 Z M17,6 C15.3431458,6 14,4.65685425 14,3 C14,1.34314575 15.3431458,0 17,0 C18.6568542,0 20,1.34314575 20,3 C20,4.65685425 18.6568542,6 17,6 Z" id="path-1"></path>
         <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="166.666667%" gradientTransform="translate(0.500000,0.500000),scale(0.300000,1.000000),rotate(180.000000),translate(-0.500000,-0.500000)" id="radialGradient-3">
@@ -82,6 +76,50 @@ export const svg = `
         </mask>
         <polygon fill="url(#radialGradient-3)" fill-rule="nonzero" mask="url(#mask-2)" points="0 0 20 0 20 6 0 6" style="z-index: 100"></polygon>
     </g>
+</svg>
+`;
+
+export const svgWithCssVariables = `
+
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  version="1.1"
+  width="640"
+  height="640"
+  viewBox="0 0 640 640"
+  style="
+    --wall-color: orange;
+    --grass-color: green;
+    --winner-user-color: red;
+    --inner-city-color: coral;
+    --shield-color-1: purple;
+    --shield-color-2: dodgerblue;
+    --windows-color: darkslategray;
+    --road-color: white;
+  "
+>
+  <g class="grass">
+    <g transform="matrix(1 0 0 1 486.1107578909 309.435702936)">
+      <path
+        style="
+          stroke: rgb(0, 0, 0);
+          stroke-width: 0;
+          stroke-dasharray: none;
+          stroke-linecap: butt;
+          stroke-dashoffset: 0;
+          stroke-linejoin: miter;
+          stroke-miterlimit: 4;
+          fill: var(--grass-color);
+          fill-rule: nonzero;
+          opacity: 1;
+        "
+        transform=" translate(0, 0)"
+        d="M -154.89393 -327.54883 L -179.6362 -43.12772000000001 L -106.44032 65.18842 L -154.89393 335.96539 L 169.66179999999997 335.96539 L 179.63618999999997 -335.96539 z"
+        stroke-linecap="round"
+      />
+    </g>
+  </g>
 </svg>
 `;
 
@@ -115,5 +153,11 @@ export const svgWithStyleAndScript = `
         <circle fill="#DDDDDD" cx="200" cy="200" r="200" onclick="change(evt)"></circle>
         <circle fill-opacity="0.8" fill="#000000" cx="400" cy="200" r="200"></circle>
     </g>
+</svg>
+`;
+
+export const utf8 = `
+<svg>
+  <tspan baseline-shift="0%" font-family="斯柯达体" font-size="20" fill="#E4E9F2" xml:space="preserve">眼观：仪表盘、车辆</tspan>
 </svg>
 `;

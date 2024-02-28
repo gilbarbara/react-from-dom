@@ -99,7 +99,6 @@ exports[`react-from-dom > should convert an SVG from a string 1`] = `
 <svg
   height="6px"
   preserveAspectRatio="xMidYMid"
-  style="--my-var: #f04"
   version="1.1"
   viewBox="0 0 20 6"
   width="20px"
@@ -185,7 +184,6 @@ exports[`react-from-dom > should convert an SVG from a string 2`] = `
   <svg
     height="6px"
     preserveAspectRatio="xMidYMid"
-    style="--my-var: #f04;"
     version="1.1"
     viewBox="0 0 20 6"
     width="20px"
@@ -232,6 +230,36 @@ exports[`react-from-dom > should convert an SVG from a string 2`] = `
         points="0 0 20 0 20 6 0 6"
         style="z-index: 100;"
       />
+    </g>
+  </svg>
+</div>
+`;
+
+exports[`react-from-dom > should convert an SVG with CSS variable from a string 1`] = `
+<div
+  data-testid="wrapper"
+>
+  <svg
+    height="640"
+    style="--wall-color: orange; --grass-color: green; --winner-user-color: red; --inner-city-color: coral; --shield-color-1: purple; --shield-color-2: dodgerblue; --windows-color: darkslategray; --road-color: white;"
+    version="1.1"
+    viewBox="0 0 640 640"
+    width="640"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g
+      class="grass"
+    >
+      <g
+        transform="matrix(1 0 0 1 486.1107578909 309.435702936)"
+      >
+        <path
+          d="M -154.89393 -327.54883 L -179.6362 -43.12772000000001 L -106.44032 65.18842 L -154.89393 335.96539 L 169.66179999999997 335.96539 L 179.63618999999997 -335.96539 z"
+          stroke-linecap="round"
+          style="stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: var(--grass-color); fill-rule: nonzero; opacity: 1;"
+          transform=" translate(0, 0)"
+        />
+      </g>
     </g>
   </svg>
 </div>

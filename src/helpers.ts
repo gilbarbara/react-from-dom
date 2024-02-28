@@ -4,7 +4,7 @@ export const styleToObject = (input: string): Record<string, any> => {
     return {};
   }
 
-  const attributes = input.replace(/\n/, '').split(/ ?; ?/);
+  const attributes = input.replace(/\s+/g, '').split(/ ?; ?/);
 
   return attributes.reduce<Record<string, string | number>>((acc, d: string) => {
     const [key, value] = d.split(/ ?: ?/);

@@ -8,6 +8,7 @@ import {
   links,
   panel,
   svg,
+  svgWithCssVariables,
   svgWithStyleAndScript,
   utf8,
 } from './__fixtures__/data';
@@ -39,6 +40,14 @@ describe('react-from-dom', () => {
     expect(node).toMatchSnapshot();
 
     const element = convert(node as Node) as React.ReactNode;
+
+    render(<div data-testid="wrapper">{element}</div>);
+
+    expect(screen.getByTestId('wrapper')).toMatchSnapshot();
+  });
+
+  it('should convert an SVG with CSS variable from a string', () => {
+    const element = convertFromString(svgWithCssVariables) as React.ReactNode;
 
     render(<div data-testid="wrapper">{element}</div>);
 
