@@ -4,11 +4,11 @@ import { noTextChildNodes, possibleStandardNames, randomString, styleToObject } 
 
 export interface Options {
   /**
-   * An array of actions to modify the nodes before they are converted to ReactNodes.
+   * An array of actions to modify the nodes before converting them to ReactNodes.
    */
   actions?: Action[];
   /**
-   * Skip removing white spaces in the output.
+   * Don't remove white spaces in the output.
    */
   allowWhiteSpaces?: boolean;
   /**
@@ -17,12 +17,12 @@ export interface Options {
    */
   includeAllNodes?: boolean;
   /**
-   * The index to start with.
+   * The index to start the React key identification.
    * @default 0
    */
   index?: number;
   /**
-   * The level to start with.
+   * The level to start the React key identification.
    * @default 0
    */
   level?: number;
@@ -36,12 +36,12 @@ export interface Options {
    */
   randomKey?: boolean;
   /**
-   * The selector to use for in the `document.querySelector` method.
+   * The selector to use in the `document.querySelector` method.
    * @default 'body > *'
    */
   selector?: string;
   /**
-   * The type of the input string.
+   * The mimeType to use in the DOMParser's parseFromString.
    * @default 'text/html'
    */
   type?: DOMParserSupportedType;

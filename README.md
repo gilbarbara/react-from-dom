@@ -1,6 +1,6 @@
 # react-from-dom
 
-[![NPM version](https://badge.fury.io/js/react-from-dom.svg)](https://www.npmjs.com/package/react-from-dom) [![CI](https://github.com/gilbarbara/react-from-dom/actions/workflows/main.yml/badge.svg)](https://github.com/gilbarbara/react-from-dom/actions/workflows/main.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/8b7357d2d51cd2ee7f8e/maintainability)](https://codeclimate.com/github/gilbarbara/react-from-dom/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/8b7357d2d51cd2ee7f8e/test_coverage)](https://codeclimate.com/github/gilbarbara/react-from-dom/test_coverage)
+[![NPM version](https://badge.fury.io/js/react-from-dom.svg)](https://www.npmjs.com/package/react-from-dom) [![CI](https://github.com/gilbarbara/react-from-dom/actions/workflows/main.yml/badge.svg)](https://github.com/gilbarbara/react-from-dom/actions/workflows/main.yml) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=gilbarbara_react-from-dom&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=gilbarbara_react-from-dom) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=gilbarbara_react-from-dom&metric=coverage)](https://sonarcloud.io/summary/new_code?id=gilbarbara_react-from-dom)
 
 Convert HTML/XML source code or a DOM node to a React element.  
 The perfect replacement for React's `dangerouslySetInnerHTML`
@@ -15,7 +15,7 @@ npm install react-from-dom
 
 ## Getting Started
 
-Set a string with HTML/XML source code OR a DOM Node which it will be used to create React elements recursively.
+Set a string with HTML/XML source code OR a DOM Node, which will be used to create React elements recursively.
 
 ```jsx
 import React from 'react';
@@ -60,27 +60,38 @@ const App = () => (
 
 The function accepts two parameters:
 
-**input** {string|Node}  - *required*  
+**input** `string|Node`  - *required*  
 An HTML/XML source code string or a DOM node.
 
-**options** {object} - optional
+**options** `Options`
 
-- **actions** {Action[]}  
-  An array of actions to parse your input before converting.  
-  Read about them below.
-- **nodeOnly** {boolean}  
-  Return the DOM Node instead of a React Element.  
+- **actions** `Action[]`  
+  An array of actions to modify the nodes before converting them to ReactNodes.  
+  *Read about them below.*
+- **allowWhiteSpaces** `boolean` ▶︎ **false**  
+  Don't remove white spaces in the output.
+- **includeAllNodes** `boolean` ▶︎ **false**  
+  Parse all nodes instead of just a single parent node.  
+  This will return a ReactNode array (or a NodeList if `nodeOnly` is true)
+- **Index** `number` ▶︎ **0**  
+  The index to start the React key identification.
+- **level** `number` ▶︎ **0**  
+  The level to start the React key identification.
+- **nodeOnly** `boolean` ▶︎ **false**  
+  Return the node (or NodeList) without converting it to a ReactNode.  
   *Only used for string inputs.*
-- **selector** {string}  
-  The CSS selector used to get your entry. Default: `body > *`  
+- **randomKey** `boolean` ▶︎ **false**  
+  Add a random key to the root element.
+- **selector** `string` ▶︎ **body > ***  
+  The selector to use in the `document.querySelector` method.  
   *Only used for string inputs.*
-- **type** {string}  
-  The mimeType used by DOMParser's parseFromString. Default: `text/html`  
+- **type** `DOMParserSupportedType` ▶︎ **text/html**  
+  The mimeType to use in the DOMParser's parseFromString.  
   *Only used for string inputs.*
 
 ### Actions
 
-You can mutate/update a Node before the conversion or replace it  with a ReactNode.
+You can mutate/update a Node before the conversion or replace it with a ReactNode.
 
 ```tsx
 {
@@ -99,7 +110,7 @@ You can mutate/update a Node before the conversion or replace it  with a ReactNo
 
 #### Examples
 
-##### Add a class to all elements that match
+##### Add a class to all elements that match.
 
 ```javascript
 {
@@ -111,7 +122,7 @@ You can mutate/update a Node before the conversion or replace it  with a ReactNo
 }
 ```
 
-##### Remove all elements with a certain class
+##### Remove all elements with a specific class.
 ```javascript
 {
   condition: node => node.className.indexOf('delete-me') >= 0,
@@ -119,7 +130,7 @@ You can mutate/update a Node before the conversion or replace it  with a ReactNo
 }
 ```
 
-##### Return a react component for some node types
+##### Return a react component for some node types.
 ```javascript
 {
   condition: node => node.nodeName.toLowerCase() === 'pre',
@@ -129,7 +140,7 @@ You can mutate/update a Node before the conversion or replace it  with a ReactNo
 },
 ```
 
-##### Transform one node into another and preserve the childNodes
+##### Transform one node into another and preserve the child nodes.
 ```javascript
 {
   condition: node => node.nodeName.toLowerCase() === 'ul',
@@ -147,12 +158,12 @@ You can mutate/update a Node before the conversion or replace it  with a ReactNo
 
 ## Browser Support
 
-If you need to support legacy browsers you'll need to include a polyfiil for `Number.isNaN` in your app.  
+If you need to support legacy browsers, you'll need to include a polyfiil for `Number.isNaN` in your app.  
 Take a look at [react-app-polyfill](https://www.npmjs.com/package/react-app-polyfill) or [polyfill.io](https://polyfill.io/v3/).
 
 ## Credits
 
-This is a fork from [dom-to-react](https://github.com/diva-e/dom-to-react) package. Thanks! ❤️
+This is a fork from the [dom-to-react](https://github.com/diva-e/dom-to-react) package. Thanks! ❤️
 
 ## License
 
