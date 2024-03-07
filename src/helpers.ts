@@ -4,17 +4,20 @@ export const styleToObject = (input: string): Record<string, any> => {
     return {};
   }
 
-  const attributes = input.replace(/\s+/g, '').split(/ ?; ?/);
-
-  return attributes.reduce<Record<string, string | number>>((acc, d: string) => {
-    const [key, value] = d.split(/ ?: ?/);
+  return input.split(/ ?; ?/).reduce<Record<string, string | number>>((acc, item: string) => {
+    const [key, value] = item
+      .split(/ ?: ?/)
+      .map((d, index) => (index === 0 ? d.replace(/\s+/g, '') : d.trim()));
 
     if (key && value) {
-      const nextKey = key.replace(/-(\w)/g, (_$0, $1) => $1.toUpperCase());
+      const nextKey = key.replace(/(\w)-(\w)/g, (_$0, $1, $2) => `${$1}${$2.toUpperCase()}`);
+      let nextValue: string | number = value.trim();
 
-      acc[key.startsWith('-') ? key : nextKey] = Number.isNaN(Number(value))
-        ? value
-        : Number(value);
+      if (!Number.isNaN(Number(value))) {
+        nextValue = Number(value);
+      }
+
+      acc[key.startsWith('-') ? key : nextKey] = nextValue;
     }
 
     return acc;

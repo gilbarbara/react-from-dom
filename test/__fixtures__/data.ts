@@ -103,6 +103,7 @@ export const svgWithCssVariables = `
     <g transform="matrix(1 0 0 1 486.1107578909 309.435702936)">
       <path
         style="
+          animation: aninate 50ms linear infinite normal forwards;
           stroke: rgb(0, 0, 0);
           stroke-width: 0;
           stroke-dasharray: none;
