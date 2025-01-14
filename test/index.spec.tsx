@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 
+import convert, { convertFromNode, convertFromString } from '../src/index';
+
 import {
   audio,
   form,
@@ -12,8 +14,6 @@ import {
   svgWithStyleAndScript,
   utf8,
 } from './__fixtures__/data';
-
-import convert, { convertFromNode, convertFromString } from '../src/index';
 
 vi.mock('../src/helpers', async () => {
   const helpers = await vi.importActual('../src/helpers');
