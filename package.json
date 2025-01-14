@@ -33,7 +33,7 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+    "react": "16.8 - 19"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.17.3",
@@ -45,7 +45,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@types/node": "^22.10.6",
-    "@types/react": "^19.0.6",
+    "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react-swc": "^3.7.2",
     "@vitest/coverage-v8": "^2.1.8",
