@@ -2,6 +2,32 @@ import * as React from 'react';
 
 import { noTextChildNodes, possibleStandardNames, randomString, styleToObject } from './helpers';
 
+interface Attributes {
+  [index: string]: any;
+
+  key: string;
+}
+
+interface GetReactNodeOptions extends Options {
+  key: string;
+  level: number;
+}
+
+export type Output = React.ReactNode | Node | NodeList;
+
+export interface Action {
+  // If this returns true, the two following functions are called if they are defined
+  condition: (node: Node, key: string, level: number) => boolean;
+
+  // Use this to inject a component or remove the node
+  // It must return something that can be rendered by React
+  post?: (node: Node, key: string, level: number) => React.ReactNode;
+
+  // Use this to update or replace the node
+  // e.g. for removing or adding attributes, changing the node type
+  pre?: (node: Node, key: string, level: number) => Node;
+}
+
 export interface Options {
   /**
    * An array of actions to modify the nodes before converting them to ReactNodes.
@@ -45,32 +71,6 @@ export interface Options {
    * @default 'text/html'
    */
   type?: DOMParserSupportedType;
-}
-
-export type Output = React.ReactNode | Node | NodeList;
-
-interface Attributes {
-  [index: string]: any;
-
-  key: string;
-}
-
-interface GetReactNodeOptions extends Options {
-  key: string;
-  level: number;
-}
-
-export interface Action {
-  // If this returns true, the two following functions are called if they are defined
-  condition: (node: Node, key: string, level: number) => boolean;
-
-  // Use this to inject a component or remove the node
-  // It must return something that can be rendered by React
-  post?: (node: Node, key: string, level: number) => React.ReactNode;
-
-  // Use this to update or replace the node
-  // e.g. for removing or adding attributes, changing the node type
-  pre?: (node: Node, key: string, level: number) => Node;
 }
 
 function getReactNode(node: Node, options: GetReactNodeOptions): React.ReactNode {
@@ -211,6 +211,18 @@ function parseName(nodeName: string) {
   return nodeName.toLowerCase();
 }
 
+export default function convert(input: Node | string, options: Options = {}): Output {
+  if (typeof input === 'string') {
+    return convertFromString(input, options);
+  }
+
+  if (input instanceof Node) {
+    return convertFromNode(input, options);
+  }
+
+  return null;
+}
+
 export function convertFromNode(input: Node, options: Options = {}): React.ReactNode {
   if (!input || !(input instanceof Node)) {
     return null;
@@ -306,16 +318,4 @@ export function convertFromString(input: string, options: Options = {}): Output 
 
   return null;
   /* c8 ignore stop */
-}
-
-export default function convert(input: Node | string, options: Options = {}): Output {
-  if (typeof input === 'string') {
-    return convertFromString(input, options);
-  }
-
-  if (input instanceof Node) {
-    return convertFromNode(input, options);
-  }
-
-  return null;
 }
